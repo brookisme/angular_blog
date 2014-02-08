@@ -1,0 +1,1 @@
+json.partial! 'angular_blog/components/component', component: @component

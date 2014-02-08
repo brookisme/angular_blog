@@ -1,0 +1,1 @@
+json.array! @components, partial: 'angular_blog/components/component', as: :component

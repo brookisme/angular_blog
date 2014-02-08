@@ -1,0 +1,1 @@
+json.array! @videos, partial: 'angular_blog/videos/video', as: :video

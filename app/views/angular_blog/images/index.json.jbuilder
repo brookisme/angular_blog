@@ -1,0 +1,1 @@
+json.array! @images, partial: 'angular_blog/images/image', as: :image

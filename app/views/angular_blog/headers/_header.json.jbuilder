@@ -1,0 +1,1 @@
+json.extract! header, :id, :content, :size

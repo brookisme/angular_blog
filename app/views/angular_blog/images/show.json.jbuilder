@@ -1,0 +1,1 @@
+json.partial! 'angular_blog/images/image', image: @image

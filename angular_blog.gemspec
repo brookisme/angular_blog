@@ -18,12 +18,11 @@ Gem::Specification.new do |s|
   s.add_development_dependency "pg"
 
   s.add_dependency "rails", "~> 4.0.0"
-  s.add_dependency "angularjs-rails"
-  s.add_dependency "angular_rails_csrf"
   s.add_dependency "sass-rails"
   s.add_dependency "jquery-rails"
   s.add_dependency "haml-rails"
-
+  s.add_dependency "coffee-rails"
+  
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "guard-rspec"
   s.add_development_dependency "factory_girl_rails"

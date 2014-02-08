@@ -1,4 +1,4 @@
-module SurveyBase
+module AngularBlog
   module Angularable
   extend ActiveSupport::Concern
     def template

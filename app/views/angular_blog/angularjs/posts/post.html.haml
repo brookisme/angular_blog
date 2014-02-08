@@ -1,0 +1,3 @@
+%h2 {{post.subject}}
+%div {{!!post.is_sticky}}
+%div{ ab_partial: true, url: "components/list", ng_init: "components=post.components" }

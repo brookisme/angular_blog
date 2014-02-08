@@ -1,0 +1,1 @@
+json.array! @blurbs, partial: 'angular_blog/blurbs/blurb', as: :blurb

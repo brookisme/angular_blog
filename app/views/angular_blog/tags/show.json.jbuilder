@@ -1,0 +1,1 @@
+json.partial! 'angular_blog/tags/tag', tag: @tag

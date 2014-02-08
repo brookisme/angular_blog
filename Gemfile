@@ -12,3 +12,10 @@ gemspec
 
 # To use debugger
 # gem 'debugger'
+
+
+gem 'jbuilder', '~> 1.2'
+
+# AngularJS
+gem 'angularjs-rails'
+gem 'angular_rails_csrf'

@@ -1,0 +1,1 @@
+json.array! @headers, partial: 'angular_blog/headers/header', as: :header

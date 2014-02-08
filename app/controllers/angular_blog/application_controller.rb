@@ -1,5 +1,5 @@
 module AngularBlog
   class ApplicationController < ActionController::Base
-    include SurveyBase::Restrictable
+    include AngularBlog::Angularable
   end
 end
