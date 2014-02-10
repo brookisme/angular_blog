@@ -1,9 +1,10 @@
 
-AngularBlogApp.controller 'VideosController', ($scope,Video) ->
+AngularBlogApp.controller 'VideosController', ($scope,Video,Youtube) ->
   # setup
   ctrl = this
   ctrl.data = {}
-
+  ctrl.youtube = Youtube
+  
   # vars 
 
 
@@ -77,7 +78,6 @@ AngularBlogApp.controller 'VideosController', ($scope,Video) ->
           console.log("delete_error:",error)
       )
       ctrl.clear()
-
 
   # scope methods 
   ctrl.setVideo = (video)->

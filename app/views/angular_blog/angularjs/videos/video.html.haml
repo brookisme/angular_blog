@@ -1,2 +1,3 @@
-%div{ ng_if:"video.host=='youtube'", ab_partial: true, url: "videos/youtube" }
-%div{ ng_if:"video.host=='vimeo'", ab_partial: true, url: "videos/vimeo" }
+%div{ ng_controller: "VideosController as videos_ctrl" }
+  %div{ ng_if:"video.host=='youtube'", ab_partial: true, url: "videos/youtube", ng_init: "ctrl=videos_ctrl" }
+  %div{ ng_if:"video.host=='vimeo'", ab_partial: true, url: "videos/vimeo", ng_init: "ctrl=videos_ctrl" }

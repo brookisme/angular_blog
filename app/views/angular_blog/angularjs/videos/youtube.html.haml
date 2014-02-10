@@ -1,3 +1,4 @@
-%h4 youtube
+%h1 youtube
 %h5 {{video.identifier}}
-%iframe{ id:"ytplayer", type:"text/html", width:"640", height:"390",src:"http://www.youtube.com/embed/{{video.identifier}}?autoplay:0", frameborder:"0" }
+.youtube-container{ data: { width: "{{component.width || null}}", height: "{{component.height || null}}", video_identifier: "{{video.identifier}}"} }
+  %div{ id: "player_{{video.identifier}}", ng_init: "ctrl.youtube.init(video.identifier)"}

@@ -1,3 +1,7 @@
 %h4 vimeo
 %h5 {{video.identifier}}
-%iframe{ src:"http://player.vimeo.com/video/{{video.identifier}}?portrait=0&amp;color=e13237", width:"500", height:"281", frameborder:"0", webkitallowfullscreen: true, mozallowfullscreen: true, allowfullscreen: true }
+%h1 WAIT
+%h2{ ng_init: "setTimeout(ctrl.testdone,4000)"} WAITING
+%h1 DONE
+
+/ %iframe{ src:"http://player.vimeo.com/video/{{video.identifier}}?portrait=0&amp;color=e13237", width:"500", height:"281", frameborder:"0", webkitallowfullscreen: true, mozallowfullscreen: true, allowfullscreen: true }
