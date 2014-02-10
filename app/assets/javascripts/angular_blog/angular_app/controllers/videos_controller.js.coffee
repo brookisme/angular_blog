@@ -9,8 +9,8 @@ AngularBlogApp.controller 'VideosController', ($scope,Video,Youtube) ->
 
 
   # init
-  ctrl.init = () ->
-    console.log("videos init")
+  ctrl.init = (component) ->
+    ctrl.data.video_component = component
 
   # rest methods
   ctrl.rest =

@@ -1,0 +1,5 @@
+- post_json = render template: 'angular_blog/posts/show', formats: [:json]
+#angular_blog{ "ng-app" => "AngularBlogApp" }
+  %div{ class: "ng-cloak toggle tall" }
+    %div{ ng_controller: "PostsController as posts_ctrl", ng_init: "posts_ctrl.setPost(#{post_json})" }
+      %div{ ab_partial: true, url: "posts/post", ng_init: "ctrl=posts_ctrl;post=#{post_json}" }

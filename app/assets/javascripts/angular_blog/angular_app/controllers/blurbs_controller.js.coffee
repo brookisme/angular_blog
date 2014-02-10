@@ -14,8 +14,8 @@ AngularBlogApp.controller 'BlurbsController', ($scope,Blurb) ->
   ]
 
   # init
-  ctrl.init = () ->
-    console.log("blurbs init")
+  ctrl.init = (component) ->
+    ctrl.data.blurb_component = component
 
   # rest methods
   ctrl.rest =

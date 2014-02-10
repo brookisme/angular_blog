@@ -13,8 +13,8 @@ AngularBlogApp.controller 'ComponentsController', ($scope,Component) ->
   ]
 
   # init
-  ctrl.init = () ->
-    console.log("components init")
+  ctrl.init = (post) ->
+    ctrl.data.component_post = post
 
   # rest methods
   ctrl.rest =

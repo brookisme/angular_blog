@@ -8,8 +8,8 @@ AngularBlogApp.controller 'ImagesController', ($scope,Image) ->
 
 
   # init
-  ctrl.init = () ->
-    console.log("images init")
+  ctrl.init = (component) ->
+    ctrl.data.image_component = component
 
   # rest methods
   ctrl.rest =

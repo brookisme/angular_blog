@@ -15,8 +15,8 @@ AngularBlogApp.controller 'HeadersController', ($scope,Header) ->
   ]
 
   # init
-  ctrl.init = () ->
-    console.log("headers init")
+  ctrl.init = (component) ->
+    ctrl.data.header_component = component
 
   # rest methods
   ctrl.rest =

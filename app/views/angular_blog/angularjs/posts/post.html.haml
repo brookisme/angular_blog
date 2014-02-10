@@ -1,3 +1,8 @@
-%h2 {{post.subject}}
-%div {{!!post.is_sticky}}
-%div{ ab_partial: true, url: "components/list", ng_init: "components=post.components" }
+.ab-post.clearfix
+  .post-data
+    .timestamp {{post.timestamp}}
+    .author {{post.author}}
+    
+  .post-content
+    %h2{ ng_if: "post.display_subject", class: "ab-post-subject" } {{post.subject}}
+    %div{ ab_partial: true, url: "components/list", ng_init: "components=post.components" }

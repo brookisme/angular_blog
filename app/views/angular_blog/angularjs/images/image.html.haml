@@ -1,1 +1,2 @@
-%img{ class:"ab-image {{image.css_class}}", src:"{{image.src}}", width: "{{component.width || null}}", height: "{{component.height || null}}" }
+%div{ ng_controller: "ImagesController as images_ctrl", ng_init: "images_ctrl.init(component)" }
+  %img{ class:"ab-image {{image.css_class}}", src:"{{image.src}}", width: "{{component.width || null}}", height: "{{component.height || null}}" }
