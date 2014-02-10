@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140210175028) do
+ActiveRecord::Schema.define(version: 20140210204523) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,18 @@ ActiveRecord::Schema.define(version: 20140210175028) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "angular_blog_comments", force: true do |t|
+    t.integer  "post_id"
+    t.string   "email"
+    t.string   "name"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "display_email"
+  end
+
+  add_index "angular_blog_comments", ["post_id"], name: "index_angular_blog_comments_on_post_id", using: :btree
 
   create_table "angular_blog_components", force: true do |t|
     t.integer  "post_id"
@@ -70,6 +82,8 @@ ActiveRecord::Schema.define(version: 20140210175028) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "display_subject", default: true
+    t.boolean  "accept_comments", default: true
+    t.boolean  "comments_closed"
   end
 
   create_table "angular_blog_tags", force: true do |t|

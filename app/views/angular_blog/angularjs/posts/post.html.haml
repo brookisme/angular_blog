@@ -3,10 +3,13 @@
     .post-details
       .timestamp {{post.timestamp}}
       .author {{post.author}}
-    .tools
+    .tools{ ng_if: "ctrl.isEditiable($index)" }
       post tools
-    
+
   .post-content
     %h2{ ng_if: "post.display_subject", class: "ab-post-subject" } {{post.subject}}
     %div{ ng_controller: "ComponentsController as components_ctrl", ng_init: "components_ctrl.init(post);" }
       %div{ ab_partial: true, url: "components/list", ng_init: "components=post.components" }
+  
+  %div{ ng_if: "post.accept_comments", ng_controller: "CommentsController as comments_ctrl", ng_init: "comments_ctrl.init(post);" }
+    .post-comments{  ab_partial: true, url: "comments/list", ng_init: "comments=post.comments" }
