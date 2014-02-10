@@ -2,11 +2,8 @@ PATH
   remote: .
   specs:
     angular_blog (0.0.1)
-      angular_rails_csrf
-      angularjs-rails
       coffee-rails
       haml-rails
-      jbuilder (~> 1.2)
       jquery-rails
       rails (~> 4.0.0)
       sass-rails

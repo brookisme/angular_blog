@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140207235934) do
+ActiveRecord::Schema.define(version: 20140210171856) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20140207235934) do
 
   create_table "angular_blog_blurbs", force: true do |t|
     t.text     "content"
-    t.string   "size"
+    t.string   "size",       default: "normal"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -29,8 +29,8 @@ ActiveRecord::Schema.define(version: 20140207235934) do
     t.integer  "postable_id"
     t.string   "postable_type"
     t.integer  "index"
-    t.integer  "width"
-    t.integer  "height"
+    t.string   "width"
+    t.string   "height"
     t.string   "link"
     t.string   "css_string"
     t.datetime "created_at"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20140207235934) do
 
   create_table "angular_blog_headers", force: true do |t|
     t.string   "content"
-    t.integer  "size"
+    t.integer  "size",       default: 2
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20140207235934) do
     t.string   "src"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "css_class",  default: "ab-block-image"
   end
 
   create_table "angular_blog_post_tags", force: true do |t|
@@ -78,7 +79,7 @@ ActiveRecord::Schema.define(version: 20140207235934) do
 
   create_table "angular_blog_videos", force: true do |t|
     t.string   "identifier"
-    t.string   "host"
+    t.string   "host",       default: "youtube"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
