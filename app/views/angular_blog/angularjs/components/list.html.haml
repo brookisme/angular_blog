@@ -1,3 +1,2 @@
-%div{ ng_controller: "ComponentsController as components_ctrl", ng_init: "components_ctrl.init(post);" }
-  .repeater.ease{ ng_repeat: "component in components" }
-    %div{ ab_partial: true, url: "components/component", ng_init: "ctrl=components_ctrl;ctrl.init(post)" }
+.repeater.ease{ ng_repeat: "component in components" }
+  %div{ ab_partial: true, url: "components/component", ng_init: "ctrl=components_ctrl;ctrl.init(post)" }
