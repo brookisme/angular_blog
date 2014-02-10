@@ -1,1 +1,3 @@
-%h2{ class:"ab-header ab-size-{{header.size}}" } {{ header.content }}
+%h2{ class:"ab-header ab-size-{{header.size}}" }
+  %div{ ng_bind_html: "header.content" } 
+    {{ header.content }}
