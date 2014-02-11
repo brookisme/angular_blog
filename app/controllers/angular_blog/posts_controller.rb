@@ -66,7 +66,9 @@ module AngularBlog
         :id,  
         :_destroy, 
         :is_sticky,
-        :subject
+        :subject,
+        :accept_comments,
+        :comments_closed
       )
     end
   end

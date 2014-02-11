@@ -24,7 +24,7 @@ AngularBlogApp.controller 'PostsController', ($scope,Post) ->
 
     new: ()->
       ctrl.clear()
-      ctrl.data.activePost = {}
+      ctrl.data.activePost = { display_subject: true, accept_comments: true }
       ctrl.data.creating_new_post = true
 
     create: ->

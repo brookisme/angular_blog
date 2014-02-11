@@ -15,7 +15,7 @@
       %td
         %input{ ng_model: "ctrl.data.activeComment.email", name: "email", required: true, type: "email" }
         %span.checkbox_wrapper
-          %input{ ng_model: "ctrl.data.activeComment.display_email", required: true, type: "checkbox" }
+          %input{ ng_model: "ctrl.data.activeComment.display_email", type: "checkbox" }
           %span.checkbox_label display email
 
         %span.error{ ng_show: "ctrl.form.email.$error.required" } Required

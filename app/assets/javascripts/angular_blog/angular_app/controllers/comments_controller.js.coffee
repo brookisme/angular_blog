@@ -93,7 +93,6 @@ AngularBlogApp.controller 'CommentsController', ($scope,Comment) ->
     ctrl.data.comment = comment
 
   ctrl.setComments = (comments)->
-    console.log("bibb",comments)
     ctrl.data.comments = comments
 
   ctrl.acceptComments = ->

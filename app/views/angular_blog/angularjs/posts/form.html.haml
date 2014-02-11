@@ -1,0 +1,45 @@
+.form_header
+  %span.title{ ng_if: "ctrl.isEditing($index,post.id)" } Edit Post
+  %span.title{ ng_if: "!ctrl.isEditing($index,post.id)" } Create Post
+  %form_buttons
+    %a{ ng_if: "ctrl.data.creating_new_post", ng_click: "ctrl.rest.create()", class: "post-tool"  }
+      %i.fa.fa-check-square-o
+    %a.cancel{ ng_if: "ctrl.data.creating_new_post", ng_click: "ctrl.clear()", class: "post-tool"  }
+      %i.fa.fa-minus-square-o
+
+%form{ name: "ctrl.form" }
+  %table.form
+    %tr
+      %td.form_label 
+        subject
+      %td
+        %input{ ng_model: "ctrl.data.activePost.subject", name: "subject", ng_minlength: "3", required: true, type: "text" }
+
+        %span.error{ ng_show: "ctrl.form.subject.$error.required" } Required
+        %span.error{ ng_show: "ctrl.form.subject.$error.minlength" } Min length 3
+    
+    %tr
+      %td.form_label 
+      %td
+        %span.checkbox_wrapper
+          %input{ ng_model: "ctrl.data.activePost.display_subject", type: "checkbox" }
+          %span.checkbox_label display subject
+
+    %tr
+      %td.form_label 
+      %td
+        %span.checkbox_wrapper
+          %input{ ng_model: "ctrl.data.activePost.accept_comments", type: "checkbox" }
+          %span.checkbox_label accept comments
+
+    %tr{ ng_if: "ctrl.data.activePost.accept_comments" }
+      %td.form_label 
+      %td
+        %span.checkbox_wrapper
+          %input{ ng_model: "ctrl.data.activePost.comments_closed", type: "checkbox" }
+          %span.checkbox_label comments closed
+
+    %tr
+      %td.form_label components
+      %td
+        {{ ctrl.data.activePost.components }}
