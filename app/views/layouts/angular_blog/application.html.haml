@@ -7,8 +7,20 @@
     = csrf_meta_tags
     = stylesheet_link_tag "//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css", rel: "stylesheet"
     = yield :styles
-        
-  %body
-    = yield
+    = yield :head_javascripts
+
+  %body{ id: "labor-voices" }
+    = yield :header
+    .main-wrappaer
+      = yield :hero
+      = render 'layouts/navbar'
+      = render 'layouts/alerts'
+      .blog-content
+        = yield
+      = render 'layouts/footer'
+
+
+    / scripts
     = javascript_include_tag "angular_blog/application"
     = yield :javascripts
+    = render 'layouts/analytics' if Rails.env=="production"

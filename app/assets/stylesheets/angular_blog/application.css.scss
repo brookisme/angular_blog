@@ -1,0 +1,72 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
+@import "global_settings";
+
+body {
+  background: url(image_path("angular_blog/hash_bg-dark.png")) repeat;
+}
+
+.buffer {
+  background: none;
+}
+
+.blog-content {
+  @include rounded(6px);
+
+  position: relative;
+  margin: 25px auto 25px;
+  width: $page_width;
+  border: 1px solid #999;
+  background-color: #fff;
+  padding: 25px;
+}
+
+/**
+*
+* Post
+*
+**/
+.ab-post{
+  border-top: 1px dotted #aaa;
+  margin-bottom: 35px;
+  padding-top: 35px;
+}
+.ab-post.post-index-0 {
+  border-top: none;
+}
+.post-content {
+  width: 75%;
+}
+
+/**
+*
+* Header
+*
+**/
+h1.ab-post-subject {
+  margin-top: 0;
+}
+.ab-header.ab-size-0 {
+  font-size: 12px;
+  line-height: 16px;
+  text-transform: none;
+  font-weight: normal;
+}
+
+/**
+*
+* Blurb
+*
+**/
+
