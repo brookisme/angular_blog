@@ -156,16 +156,15 @@ h1.ab-post-subject {
 
 .ab-comments {
   font-size: 12px;
-  background-color: #ddd;
   padding: 10px;
   color: #333;
-  border-top: 6px solid #aaa;
+  border-top: 6px solid #ccc;
 }
 .ab-comment {
   margin: 5px 0;
 }
 .ab-commentor {
-  color: #036;
+  color: #069;
   font-weight: bold;
   text-transform: capitalize;
   margin-right: 5px;
@@ -178,5 +177,111 @@ h1.ab-post-subject {
   color: #060;
   font-weight: bold;
 }
+.comment-toggles{
+  margin-left: 5px;
+  padding-left: 7px;
+  border-left: 2px solid #999;
+}
+.comment-tools {
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: bold;
+  color: #999;
+  margin-bottom: 10px;
+}
+.comment-tool {
+  position: relative;
+  left: 0;
+  top: -4px;
+}
+
+/**
+*
+* table forms
+*
+**/
+
+
+table.form {
+  width: 100%
+}
+table.form td {
+  text-align: left;
+  padding: 2px 5px;
+}
+table.form td.form_label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: right;
+  border-right: 1px solid #999; 
+  position: relative;
+  top: -4px;
+  left: 0;
+}
+table.form textarea {
+  width: 75%;
+  height: 100px;
+}
+table.form tr.text_area td {
+  padding: 5px; 
+}
+table.form tr td:last-child {
+  width: 85%;
+}
+table.form tr td ul li input {
+  width: 55%
+}
+table.form tr td ul li span {
+  position: relative;
+  top: -5px;
+  left: 0;
+}
+table.form tr td ul li span a {
+  margin-right: 5px;
+}
+.error {
+  position: relative;
+  top: -4px;
+  left: 5px;
+  text-transform: uppercase;
+  color: #900;
+  font-weight: bold;
+}
+.checkbox_wrapper {
+  position: relative;
+  top: -4px;
+  left: 5px;
+  text-transform: uppercase;
+  color: #069;
+  font-weight: bold;
+  margin-right: 10px;
+}
+.checkbox_wrapper input[type="checkbox"] {
+  position: relative;
+  top: -2px;
+  left: 0px;
+  margin: 0 2px;
+}
+.form_header {
+  width: 100%;
+  text-align: center;
+  font-size: 16px;
+  text-transform: uppercase;
+  color: #333;
+  margin-bottom: 10px;
+}
+.form_header .title {
+  margin-right: 15px;
+}
+.form_buttons .fa {
+  margin-right: 2px;
+  font-weight: bold;
+}
+a.cancel,
+a.delete {
+  color: #900;
+}
+
 
 

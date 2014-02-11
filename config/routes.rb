@@ -4,8 +4,8 @@ AngularBlog::Engine.routes.draw do
     get ':path.html' => 'application#template', :constraints => { :path => /.+/  }
   end
 
-
   resources :posts
+  resources :comments
   resources :components
   resources :headers
   resources :blurbs

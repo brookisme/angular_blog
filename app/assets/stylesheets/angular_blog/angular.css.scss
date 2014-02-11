@@ -1,0 +1,38 @@
+.ng-cloak {
+  display: none;
+}
+
+/***
+*
+* Animations
+*
+**/
+
+$ease_duration: .25s;
+.ease {
+    -webkit-transition: linear $ease_duration;
+    -moz-transition: linear $ease_duration;
+    -ms-transition: linear $ease_duration;
+    -o-transition: linear $ease_duration;
+    transition: linear $ease_duration;
+}
+.ease.ng-enter {
+    opacity: 0;
+/*    max-height: 0;
+*/}
+.ease.ng-enter-active {
+    opacity: 1;
+/*    max-height: 450px;
+*/}
+.ease.ng-leave {
+    opacity: 1;
+/*    max-height: 450px;
+*/}
+.ease.ng-leave-active {
+    opacity: 0;
+/*    max-height: 0;
+*/}
+.ease.tall.ng-leave,
+.ease.tall.ng-enter-active {
+    max-height: 1000px;
+}

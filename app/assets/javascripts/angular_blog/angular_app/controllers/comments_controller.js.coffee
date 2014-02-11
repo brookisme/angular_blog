@@ -3,6 +3,7 @@ AngularBlogApp.controller 'CommentsController', ($scope,Comment) ->
   # setup
   ctrl = this
   ctrl.data = {}
+  ctrl.data.comments = []
 
   # vars 
   ctrl.data.comment_types = [
@@ -14,7 +15,9 @@ AngularBlogApp.controller 'CommentsController', ($scope,Comment) ->
 
   # init
   ctrl.init = (post) ->
-    ctrl.data.comment_post = post
+    if !!post
+      ctrl.data.comment_post = post
+      ctrl.setComments(post.comments)
 
   # rest methods
   ctrl.rest =
@@ -33,9 +36,10 @@ AngularBlogApp.controller 'CommentsController', ($scope,Comment) ->
       ctrl.data.creating_new_comment = true
 
     create: ->
-      if !(ctrl.locked || ctrl.form.$error.required)
+      if !(ctrl.locked || ctrl.form_errors())
         ctrl.locked = true
         working_comment = angular.copy(ctrl.data.activeComment)
+        working_comment.post_id = ctrl.data.comment_post.id
         Comment.save(
           working_comment,
           (comment)->
@@ -89,20 +93,34 @@ AngularBlogApp.controller 'CommentsController', ($scope,Comment) ->
     ctrl.data.comment = comment
 
   ctrl.setComments = (comments)->
+    console.log("bibb",comments)
     ctrl.data.comments = comments
 
+  ctrl.acceptComments = ->
+    ctrl.data.comment_post.accept_comments
+  
+  ctrl.commentsClosed = ->
+    ctrl.data.comment_post.comments_closed
+
+  ctrl.numComments = ->
+    ctrl.data.comments.length
+
+  ctrl.hasComments = ->
+    ctrl.numComments() > 0
+
   ctrl.showComments = (show=true)->
-    console.log("SC",show)
     ctrl.data.showingComments = show
 
   ctrl.clear = ->
-    ctrl.data.parent_id = null
     ctrl.data.activeComment = null
     ctrl.data.edit_index = null
     ctrl.data.creating_new_comment = false
 
-  ctrl.isEditing = (index,parent_id)->
-    (index == ctrl.data.edit_index) && (parent_id == ctrl.data.parent_id)
+  ctrl.isEditing = (index,post_id)->
+    (index == ctrl.data.edit_index) && (post_id == ctrl.data.comment_post.id)
+  
+  ctrl.form_errors = ->
+    ctrl.form.email.$error.required || ctrl.form.email.$error.email || ctrl.form.content.$error.required || ctrl.form.content.$error.minlength 
 
   # internal
 

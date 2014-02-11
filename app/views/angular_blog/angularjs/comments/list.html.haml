@@ -1,10 +1,21 @@
-.ab-comments{ ng_if: "post.accept_comments && comments.length>0" }
-  %div.ease{ ng_if: "!ctrl.data.showingComments" }
-    .comment-tools
-      %span{ class: "comment-count" } {{ comments.length }} comments
-      %a{ ng_click: "ctrl.showComments()", class: "comment-tool" } show
-  %div.ease{ ng_if: "ctrl.data.showingComments" }
-    .comment-tools
-      %a{ ng_click: "ctrl.showComments(false)", class: "comment-tool"  } hide
-    .repeater{ ng_repeat: "comment in comments" }
+.ab-comments{ ng_if: "ctrl.acceptComments()" }
+  .comment-tools
+    %span{ class: "comment-count" } 
+      %span{ ng_if: "!ctrl.hasComments()" } be the first to comment!
+      %span{ ng_if: "ctrl.numComments()==1" } 1 Comment
+      %span{ ng_if: "ctrl.numComments()>1" } {{ ctrl.numComments() }} Comments
+    
+    %span{ ng_if: "ctrl.hasComments()", class: "comment-toggles"}
+      %a{ ng_if: "!ctrl.data.showingComments", ng_click: "ctrl.showComments()", class: "comment-toggle" } show
+      %a{ ng_if: "ctrl.data.showingComments", ng_click: "ctrl.showComments(false)", class: "comment-toggle"  } hide
+    
+    %span{ class: "comment-tool" }
+      %a{ ng_if: "!ctrl.commentsClosed() && !ctrl.data.creating_new_comment", ng_click: "ctrl.rest.new()", class: "pull-right"  }  
+        %i.fa.fa-pencil-square-o.fa-2x
+
+  .ease{ ng_if: "ctrl.data.creating_new_comment" }
+    .comment-new{ ab_partial: true, url: "comments/form" }
+
+  %div.ease{ ng_if: "ctrl.data.showingComments" }      
+    .repeater{ ng_repeat: "comment in ctrl.data.comments" }
       %div{ ab_partial: true, url: "comments/comment" }

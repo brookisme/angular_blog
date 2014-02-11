@@ -1,0 +1,33 @@
+.form_header
+  %span.title{ ng_if: "ctrl.isEditing($index,post.id)" } Edit Comment
+  %span.title{ ng_if: "!ctrl.isEditing($index,post.id)" } Create Comment
+  %form_buttons
+    %a{ ng_if: "!post.comments_closed && ctrl.data.creating_new_comment", ng_click: "ctrl.rest.create()", class: "comment-tool"  }
+      %i.fa.fa-check-square-o
+    %a.cancel{ ng_if: "!post.comments_closed && ctrl.data.creating_new_comment", ng_click: "ctrl.clear()", class: "comment-tool"  }
+      %i.fa.fa-minus-square-o
+
+%form{ name: "ctrl.form" }
+  %table.form
+    %tr
+      %td.form_label 
+        email
+      %td
+        %input{ ng_model: "ctrl.data.activeComment.email", name: "email", required: true, type: "email" }
+        %span.checkbox_wrapper
+          %input{ ng_model: "ctrl.data.activeComment.display_email", required: true, type: "checkbox" }
+          %span.checkbox_label display email
+
+        %span.error{ ng_show: "ctrl.form.email.$error.required" } Required
+        %span.error{ ng_show: "ctrl.form.email.$error.email" } Invalid email
+
+    %tr
+      %td.form_label name
+      %td
+        %input{ ng_model: "ctrl.data.activeComment.name", type: "text" }
+    %tr
+      %td.form_label comment
+      %td
+        %textarea{ ng_model: "ctrl.data.activeComment.content", name: "content", required: true, ng_minlength: "3", type: "text" }
+        %span.error{ ng_show: "ctrl.form.content.$error.required" } Required
+        %span.error{ ng_show: "ctrl.form.content.$error.minlength" } Min length 3
