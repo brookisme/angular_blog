@@ -8,7 +8,7 @@
       %i.fa.fa-minus-square-o
 
 %form{ name: "ctrl.form" }
-  %table.form
+  %table.form{ ng_controller: "ComponentsController as components_ctrl", ng_init: "components_ctrl.init(ctrl.data.activePost);" }
     %tr
       %td.form_label 
         subject
@@ -39,8 +39,10 @@
           %input{ ng_model: "ctrl.data.activePost.comments_closed", type: "checkbox" }
           %span.checkbox_label comments closed
 
-    %tr
+
+    %tr.divider{ ng_if: "!!ctrl.data.activePost.id" }
       %td.form_label components
-      %td
-        Components form goes here...
-        {{ ctrl.data.activePost.components }}
+      %td 
+        .component-new{ ab_partial: true, url: "components/form", ng_init: "ctrl=components_ctrl" }
+
+

@@ -61,8 +61,14 @@ module AngularBlog
       params.require(:component).permit(
         :id,  
         :_destroy, 
-        :is_sticky,
-        :subject
+        :post_id,
+        :postable_id,
+        :postable_type,
+        :index,
+        :width,
+        :height,
+        :link,
+        :css_string
       )
     end
 

@@ -86,14 +86,20 @@ AngularBlogApp.controller 'PostsController', ($scope,Post) ->
   ctrl.setPosts = (posts)->
     ctrl.data.posts = posts
 
+  ctrl.newComponent = ->
+    console.log("add component")
+    ctrl.data.adding_component = true
+
   ctrl.clear = ->
     ctrl.data.parent_id = null
     ctrl.data.activePost = null
     ctrl.data.edit_index = null
+    ctrl.data.adding_component = false
     ctrl.data.creating_new_post = false
 
-  ctrl.isEditing = (index,parent_id)->
-    (index == ctrl.data.edit_index) && (parent_id == ctrl.data.parent_id)
+  ctrl.isEditing = (index,post_id)->
+    if !!ctrl.data.activePost
+      (index == ctrl.data.edit_index) && (post_id == ctrl.data.activePost.id)
 
   # internal
 

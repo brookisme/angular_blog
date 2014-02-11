@@ -1,15 +1,25 @@
 %div{ class: "ab-post post-index-{{$index}} clearfix" }
-  %h1.post-subject{ ng_if: "post.display_subject", class: "ab-post-subject" } {{post.subject}}
+  %h1.post-subject.ease{ ng_if: "!ctrl.isEditing($index,post.id) && post.display_subject", class: "ab-post-subject" } {{post.subject}}
   .post-data.pull-right
     .post-details
       .timestamp {{post.timestamp}}
       .author {{post.author}}
-    .tools{ ng_if: "ctrl.isEditiable($index)" }
-      post tools
+    .post-tools{ ng_if: "true" }
+      %a{ ng_if: "!ctrl.isEditing($index,post.id) && !ctrl.data.creating_new_post", ng_click: "ctrl.rest.edit($index,post)", class: "pull-right" } 
+        %i.fa.fa-pencil-square-o Edit
+      %a.delete{ ng_if: "!ctrl.isEditing($index,post.id)", ab_confirm: "Do you really want to delete \"{{post.subject}}\"?", action: "ctrl.rest.delete($index,post,posts)" } 
+        %i.fa.fa-times Delete
+      %a{ ng_if: "ctrl.isEditing($index,post.id) && !ctrl.data.creating_new_post", ng_click: "ctrl.rest.update($index,post)", class: "pull-right" } 
+        %i.fa.fa-check-square-o Update
+      %a.cancel{ ng_if: "ctrl.isEditing($index,post.id)", ng_click: "ctrl.clear()" } 
+        %i.fa.fa-minus-square-o Cancel
 
-  .post-content.pull-left
+  .post-content.pull-left.ease{ ng_if: "!ctrl.isEditing($index,post.id)" }
     %div{ ng_controller: "ComponentsController as components_ctrl", ng_init: "components_ctrl.init(post);" }
       %div{ ab_partial: true, url: "components/list", ng_init: "components=post.components" }
   
     %div{ ng_if: "post.accept_comments", ng_controller: "CommentsController as comments_ctrl", ng_init: "comments_ctrl.init(post);" }
       .post-comments{  ab_partial: true, url: "comments/list", ng_init: "ctrl=comments_ctrl" }
+
+  .post-edit.pull-left.ease{ ng_if: "ctrl.isEditing($index,post.id)" }
+    .post-edit{ ab_partial: true, url: "posts/form" }

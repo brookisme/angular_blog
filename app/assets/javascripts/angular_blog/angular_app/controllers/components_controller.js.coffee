@@ -5,7 +5,7 @@ AngularBlogApp.controller 'ComponentsController', ($scope,Component) ->
   ctrl.data = {}
 
   # vars 
-  ctrl.data.component_types = [
+  ctrl.data.postable_types = [
     "Header",
     "Blurb",
     "Image",
@@ -15,6 +15,8 @@ AngularBlogApp.controller 'ComponentsController', ($scope,Component) ->
   # init
   ctrl.init = (post) ->
     ctrl.data.component_post = post
+    ctrl.setComponents(post.components || [])
+    console.log("POST",post,post.components)
 
   # rest methods
   ctrl.rest =
@@ -33,14 +35,15 @@ AngularBlogApp.controller 'ComponentsController', ($scope,Component) ->
       ctrl.data.creating_new_component = true
 
     create: ->
-      if !(ctrl.locked || ctrl.form.$error.required)
+      if !(ctrl.locked)
         ctrl.locked = true
         working_component = angular.copy(ctrl.data.activeComponent)
+        working_component.post_id = ctrl.data.component_post.id
         Component.save(
           working_component,
           (component)->
-            ctrl.data.components ||= []
-            ctrl.data.components.push(component)
+            ctrl.data.component_post.components ||= []
+            ctrl.data.component_post.components.push(component)
             ctrl.clear()
             ctrl.locked = false
           ,
@@ -91,11 +94,15 @@ AngularBlogApp.controller 'ComponentsController', ($scope,Component) ->
   ctrl.setComponents = (components)->
     ctrl.data.components = components
 
+  ctrl.showOptions = (show=true) ->
+    ctrl.data.showing_options = show
+
   ctrl.clear = ->
     ctrl.data.parent_id = null
     ctrl.data.activeComponent = null
     ctrl.data.edit_index = null
     ctrl.data.creating_new_component = false
+    ctrl.data.showing_options = false
 
   ctrl.isHeader = (type)->
     type == "header"

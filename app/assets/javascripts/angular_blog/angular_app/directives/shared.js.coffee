@@ -41,7 +41,7 @@ AngularBlogApp.directive "abLinkWrap", ->
 #
 AngularBlogApp.directive "abConfirm", ->
     link: (scope, el, attrs)->
-      msg = attrs.confirm || "Are you sure?"
+      msg = attrs.abConfirm || "Are you sure you want to do that?"
       el.bind 'click', ->
         scope.$eval(attrs.action) if window.confirm(msg)
 

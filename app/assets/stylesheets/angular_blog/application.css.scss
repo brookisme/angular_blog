@@ -49,7 +49,12 @@ body {
 .post-content {
   width: 75%;
 }
-
+.post-tools a {
+  margin-left: 10px;
+}
+.post-tools a .fa {
+  margin-right: 5px;
+}
 /**
 *
 * Header
@@ -283,5 +288,22 @@ a.delete {
   color: #900;
 }
 
+tr.divider td {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dotted #aaa;
+}
+
+tr.divider td.form_label {
+  border-top: none;
+  top: 1px;
+}
+.inner_tool {
+  text-transform: uppercase;
+  font-weight: bold;
+  position: relative;
+  top: -3px;
+  margin: 0 5px 0 15px;
+}
 
 

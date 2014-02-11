@@ -1,0 +1,43 @@
+.component-tools
+  %a{ ng_if: "!ctrl.data.creating_new_component", ng_click: "ctrl.rest.new()" } 
+    %span.inner_tool Add Compononent 
+    %i.fa.fa-plus-square-o.fa-2x
+  %a.cancel{ ng_if: "ctrl.data.creating_new_component", ng_click: "ctrl.clear()" } 
+    %span.inner_tool Cancel 
+    %i.fa.fa-minus-square-o.fa-2x
+
+.component-form{ng_if: "ctrl.data.creating_new_component"}
+  %form{ name: "ctrl.form" }
+    .inner-form-section.toggler{ ng_if: "ctrl.data.showing_options" }
+      %a.cancel{ ng_click: "ctrl.showOptions(false)", class: "component-tool"  }
+        %span.toggler_label options
+        %i.fa.fa-minus-square-o
+      .option 
+        %input{ ng_model: "ctrl.data.activeComponent.link", name: "link", type: "text", placeholder: "link: http://laborvoices.com/press" }
+      .option 
+        %input{ ng_model: "ctrl.data.activeComponent.width", name: "width", type: "text", placeholder: "width: 200/200px/200%" }
+      .option 
+        %input{ ng_model: "ctrl.data.activeComponent.height", name: "height", type: "text", placeholder: "height: 200/200px/200%" }
+
+    .inner-form-section.toggler{ ng_if: "!ctrl.data.showing_options" }
+      %a{ ng_click: "ctrl.showOptions()", class: "component-tool"  }
+        %span.toggler_label options
+        %i.fa.fa-plus-square-o
+
+    .inner-form-section
+      %select{ ng_model: "ctrl.data.activeComponent.postable_type", ng_options:"type for type in ctrl.data.postable_types" }
+      %h4 type: {{ ctrl.data.activeComponent.postable_type }}
+      %div{ ng_if: "ctrl.data.activeComponent.postable_type=='Header'", ab_partial: true, url: "headers/form" }
+        
+    .inner-form-tools
+      %form_buttons
+        %a{ ng_if: "ctrl.data.creating_new_component", ng_click: "ctrl.rest.create()", class: "component-tool"  }
+          %span.tool-label add 
+          %i.fa.fa-check-square-o
+        %a.cancel{ ng_if: "ctrl.data.creating_new_component", ng_click: "ctrl.clear()", class: "component-tool"  }
+          %span.tool-label cancel
+          %i.fa.fa-minus-square-o
+
+.component_list{ ng_if: "ctrl.data.component_post.components.length>0" }
+  .repeater{ ng_repeat: "component in ctrl.data.component_post.components" }
+    %h11 {{component}}
