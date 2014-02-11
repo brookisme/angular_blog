@@ -1,3 +1,3 @@
 AngularBlogApp.factory "Post", ($resource) ->
-  PostResource = $resource(blog_root + "posts/:id.json", {id: "@id"}, {update: {method: "PUT"}})
+  PostResource = $resource("posts/:id.json", {id: "@id"}, {update: {method: "PUT"}})
   class Post extends PostResource

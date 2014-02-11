@@ -7,9 +7,12 @@ AngularBlogApp.directive "abPartial", ->
   transclude: true
   template: (el,attrs)->
     if !!attrs.url
-      path = blog_root+'templates/'+attrs.url+'.html'
+      path = 'templates/'+attrs.url+'.html'
+      console.log(path)
     if !!path
       '<div ng_include="\''+path+'\'"></div>'
+    else
+      '<span class="ab-load-error"></span>'
 
 #
 # ab_link_wrapper:
