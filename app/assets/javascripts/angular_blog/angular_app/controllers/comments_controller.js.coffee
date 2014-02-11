@@ -91,6 +91,10 @@ AngularBlogApp.controller 'CommentsController', ($scope,Comment) ->
   ctrl.setComments = (comments)->
     ctrl.data.comments = comments
 
+  ctrl.showComments = (show=true)->
+    console.log("SC",show)
+    ctrl.data.showingComments = show
+
   ctrl.clear = ->
     ctrl.data.parent_id = null
     ctrl.data.activeComment = null

@@ -1,2 +1,10 @@
-.repeater.ease{ ng_repeat: "comment in comments" }
-  %div{ ab_partial: true, url: "comments/comment" }
+.ab-comments{ ng_if: "post.accept_comments && comments.length>0" }
+  %div.ease{ ng_if: "!ctrl.data.showingComments" }
+    .comment-tools
+      %span{ class: "comment-count" } {{ comments.length }} comments
+      %a{ ng_click: "ctrl.showComments()", class: "comment-tool" } show
+  %div.ease{ ng_if: "ctrl.data.showingComments" }
+    .comment-tools
+      %a{ ng_click: "ctrl.showComments(false)", class: "comment-tool"  } hide
+    .repeater{ ng_repeat: "comment in comments" }
+      %div{ ab_partial: true, url: "comments/comment" }

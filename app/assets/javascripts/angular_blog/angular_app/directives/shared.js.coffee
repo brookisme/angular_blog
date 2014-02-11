@@ -8,7 +8,6 @@ AngularBlogApp.directive "abPartial", ->
   template: (el,attrs)->
     if !!attrs.url
       path = 'templates/'+attrs.url+'.html'
-      console.log(path)
     if !!path
       '<div ng_include="\''+path+'\'"></div>'
     else

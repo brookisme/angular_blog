@@ -1,5 +1,9 @@
 %div{ class: "ab-comment" } 
   {{comment.content}}
-  %span{ ng_if: "!!comment.name", class: "ab-commentor" } {{comment.name}}  
-  %span{ ng_if: "comment.display_email && !!comment.email", class: "ab-commentor-email" } ({{comment.email}})
+  &mdash;
+  %span{ class: "ab-commentor" } 
+    %span{ ng_if: "!!comment.name"} {{comment.name}}  
+    %span{ ng_if: "!comment.name"} Anonymous 
+  %span{ ng_if: "comment.display_email && !!comment.email", class: "ab-commentor-email" } 
+    ( {{comment.email}} )
   %span{ class: "ab-comment-timestamp" } {{comment.timestamp}}

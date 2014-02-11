@@ -12,4 +12,4 @@
       %div{ ab_partial: true, url: "components/list", ng_init: "components=post.components" }
   
     %div{ ng_if: "post.accept_comments", ng_controller: "CommentsController as comments_ctrl", ng_init: "comments_ctrl.init(post);" }
-      .post-comments{  ab_partial: true, url: "comments/list", ng_init: "comments=post.comments" }
+      .post-comments{  ab_partial: true, url: "comments/list", ng_init: "comments=post.comments;ctrl=comments_ctrl" }

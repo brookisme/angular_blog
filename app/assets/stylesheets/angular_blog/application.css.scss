@@ -147,3 +147,36 @@ h1.ab-post-subject {
 .ab-video {
   margin: 10px 0;
 }
+
+/**
+*
+* Comments
+*
+**/
+
+.ab-comments {
+  font-size: 12px;
+  background-color: #ddd;
+  padding: 10px;
+  color: #333;
+  border-top: 6px solid #aaa;
+}
+.ab-comment {
+  margin: 5px 0;
+}
+.ab-commentor {
+  color: #036;
+  font-weight: bold;
+  text-transform: capitalize;
+  margin-right: 5px;
+}
+.ab-commentor-email {
+  font-weight: bold;
+  margin-right: 5px;
+}
+.ab-comment-timestamp {
+  color: #060;
+  font-weight: bold;
+}
+
+
