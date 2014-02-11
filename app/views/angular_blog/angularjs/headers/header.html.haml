@@ -1,4 +1,4 @@
 %div{ ng_controller: "HeadersController as headers_ctrl", ng_init: "headers_ctrl.init(component)" }
-  %h2{ class:"ab-header ab-size-{{header.size}}" }
+  %div{ class:"ab-header ab-size-{{header.size}}" }
     %div{ ng_bind_html: "header.content" } 
       {{ header.content }}

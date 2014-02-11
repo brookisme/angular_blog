@@ -41,6 +41,7 @@ body {
   border-top: 1px dotted #aaa;
   margin-bottom: 35px;
   padding-top: 35px;
+  color: #666;
 }
 .ab-post.post-index-0 {
   border-top: none;
@@ -55,13 +56,58 @@ body {
 *
 **/
 h1.ab-post-subject {
-  margin-top: 0;
+  margin-top: 0; 
+}
+.ab-header {
+  margin: 0 0 10px;
 }
 .ab-header.ab-size-0 {
   font-size: 12px;
   line-height: 16px;
   text-transform: none;
   font-weight: normal;
+}
+.ab-header.ab-size-1 {
+  font-size: 12px;
+  line-height: 16px;
+  text-transform: none;
+  font-weight: bold;
+}
+.ab-header.ab-size-2 {
+  font-size: 14px;
+  line-height: 16px;
+  text-transform: none;
+  font-weight: normal;
+}
+.ab-header.ab-size-3 {
+  font-size: 14px;
+  line-height: 16px;
+  text-transform: none;
+  font-weight: bold;
+}
+.ab-header.ab-size-4 {
+  font-size: 18px;
+  line-height: 21px;
+  text-transform: none;
+  font-weight: normal;
+}
+.ab-header.ab-size-5 {
+  font-size: 18px;
+  line-height: 21px;
+  text-transform: none;
+  font-weight: bold;
+}
+.ab-header.ab-size-6 {
+  font-size: 21px;
+  line-height: 23px;
+  text-transform: none;
+  font-weight: normal;
+}
+.ab-header.ab-size-7 {
+  font-size: 21px;
+  line-height: 23px;
+  text-transform: none;
+  font-weight: bold;
 }
 
 /**
@@ -70,3 +116,34 @@ h1.ab-post-subject {
 *
 **/
 
+.ab-blurb {
+  margin: 10px 0;
+}
+.ab-size-tiny {
+  font-size: 11px;
+  line-height: 14px;
+}
+.ab-size-small {
+  font-size: 14px;
+  line-height: 17px;
+}
+.ab-size-large {
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: lighter;
+}
+.ab-size-huge {
+  font-size: 28px;
+  line-height: 33px;
+  font-weight: lighter;
+}
+
+/**
+*
+* Image/Video
+*
+**/
+.ab-image,
+.ab-video {
+  margin: 10px 0;
+}
