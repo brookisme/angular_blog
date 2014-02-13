@@ -1,0 +1,142 @@
+@import "global_settings";
+
+$label_column_width: 100px;
+$input_column_width: 500px;
+$column_spacing: 10px;
+$checkbox_left: 22px;
+
+
+/*
+*
+* layout
+*
+*/
+form {
+  margin-bottom: 0;
+}
+
+.form-row {
+  display: table-row;
+}
+
+.form-row .section-header, 
+.form-row .input-column {
+  display: table-cell;
+  width: $label_column_width;
+  padding: 5px 0 5px $column_spacing;
+  border-left: 1px solid #999;
+  text-align: left;
+}
+
+.form-row .section-header {
+  font-size: 12px;
+  font-weight: bold;
+  color: #666;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.form-row .section-header.subsection {
+  padding-top: 15px;
+  font-weight: 200;
+  text-transform: none;
+  color: #999;
+  font-size: 16px;
+}
+.form-row .label-column {
+  display: table-cell;
+  width: $label_column_width;
+  padding-right: $column_spacing;
+  text-align: right;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  position: relative;
+  top: -4px;
+  left: 0;
+}
+
+.form-row .input-column {
+  width: $input_column_width;
+  padding: 5px 0 0 $column_spacing;
+}
+
+.form-row .input-column input[type='text'],
+.form-row .input-column textarea {
+  width: 75%
+}
+.form-row .input-column.long input[type='text'],
+.form-row .input-column.long textarea {
+  width: 100%;
+}
+.form-row .input-column.short input[type='text'],
+.form-row .input-column.short textarea {
+  width: 50%;
+}
+
+.form-row .input-column.checkbox{
+  padding: 0 0 0 $column_spacing;
+}
+
+.input-column.checkbox input[type='checkbox'] {
+  position: relative;
+  top: 0;
+  left: $checkbox_left;
+}
+
+.input-column.checkbox label {
+  margin-bottom: 0;
+  margin-left: $checkbox_left;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #069;
+  font-weight: bold;
+}
+
+
+.form textarea {
+  width: 75%;
+  height: 100px;
+}
+
+.form-row.repeater > .input-column {
+  border-top: 1px dotted #ccc;
+}
+
+.input-column .input-header {
+  text-transform: uppercase;
+  padding-bottom: 15px;
+}
+.form-row.repeater > .input-column > .repeater-header > .identity {
+  position: relative;
+  top: 2px;
+  left: 0;
+  margin-right: 10px;
+}
+
+/*
+*
+* elements
+*
+*/
+
+.inner-tool {
+  text-transform: uppercase;
+  position: relative;
+  top: -3px;
+  margin: 0 10px 0 0;
+}
+
+.error {
+  position: relative;
+  top: -4px;
+  left: 5px;
+  text-transform: uppercase;
+  color: #900;
+  font-weight: bold;
+}
+
+.form_buttons .fa {
+  margin-right: 2px;
+  font-weight: bold;
+}

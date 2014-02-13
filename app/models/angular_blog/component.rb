@@ -4,8 +4,8 @@ module AngularBlog
     belongs_to :postable, polymorphic: true
 
     def type
-      unless postable.nil?
-        postable_type.gsub("AngularBlog::","").downcase
+      unless postable_type.nil?
+        postable_type.gsub("AngularBlog::","").capitalize
       end
     end
   end

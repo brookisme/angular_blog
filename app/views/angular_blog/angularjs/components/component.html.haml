@@ -1,6 +1,15 @@
+
+.form-row.repeater
+  .label-column
+    %a{ ng_click: "ctrl.rest.edit($index,component)" } 
+      %i.fa.fa-pencil-square-o Edit
+    %a.delete{ ab_confirm: "Do you really want to delete this component?", action: "ctrl.rest.delete($index,component,true)" } 
+      %i.fa.fa-times Delete
+  .input-column
+    .input-header id:{{ component.id }} type:{{component.type}}
+
 %div{ class: "ab-component {{component.css_string}}" }
-  %div{ ab_link_wrap: true, href: "{{component.link}}" }
-    %div{ ng_if:"component.type=='header'", ab_partial: true, url: "headers/header", ng_init: "header=component.postable"}
-    %div{ ng_if:"component.type=='blurb'", ab_partial: true, url: "blurbs/blurb", ng_init: "blurb=component.postable" }
-    %div{ ng_if:"component.type=='image'", ab_partial: true, url: "images/image", ng_init: "image=component.postable" }
-    %div{ ng_if:"component.type=='video'", ab_partial: true, url: "videos/video", ng_init: "video=component.postable" }
+  %div{ ng_if:"component.postable_type=='AngularBlog::Header'", ab_partial: true, url: "headers/header", ng_init: "header=component.postable"}
+  %div{ ng_if:"component.postable_type=='AngularBlog::Blurb'", ab_partial: true, url: "blurbs/blurb", ng_init: "blurb=component.postable" }
+  %div{ ng_if:"component.postable_type=='AngularBlog::Image'", ab_partial: true, url: "images/image", ng_init: "image=component.postable" }
+  %div{ ng_if:"component.postable_type=='AngularBlog::Video'", ab_partial: true, url: "videos/video", ng_init: "video=component.postable" }

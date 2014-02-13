@@ -5,7 +5,7 @@ AngularBlogApp.controller 'HeadersController', ($scope,Header) ->
   ctrl.data = {}
 
   # vars 
-  ctrl.data.sizes = [
+  ctrl.sizes = [
     "1",
     "2",
     "3",
@@ -17,6 +17,8 @@ AngularBlogApp.controller 'HeadersController', ($scope,Header) ->
   # init
   ctrl.init = (component) ->
     ctrl.data.header_component = component
+    ctrl.setHeader(component.postable)
+    ctrl.rest.new() if !ctrl.data.header
 
   # rest methods
   ctrl.rest =
@@ -35,55 +37,65 @@ AngularBlogApp.controller 'HeadersController', ($scope,Header) ->
       ctrl.data.creating_new_header = true
 
     create: ->
-      if !(ctrl.locked || ctrl.form.$error.required)
+      console.log("c1",ctrl.data.activeHeader)
+      if !(ctrl.locked || form_errors())
         ctrl.locked = true
         working_header = angular.copy(ctrl.data.activeHeader)
+        working_header.component_id = ctrl.data.header_component.id
+        console.log("c2",working_header)
+
         Header.save(
           working_header,
           (header)->
-            ctrl.data.headers ||= []
-            ctrl.data.headers.push(header)
+            console.log("cs",header)
+            ctrl.setHeader(header)
             ctrl.clear()
             ctrl.locked = false
           ,
           (error)->
+            console.log("ce",error)
             console.log("create_error:",error)
             ctrl.clear()
             ctrl.locked = false
         )
 
 
-    edit: (index,header) ->
+    edit: (header) ->
       ctrl.clear()
-      ctrl.data.edit_index = index
       ctrl.data.activeHeader = header
 
-    update: (index,header)->
-      if !(ctrl.locked || ctrl.form.$error.required)
+    update: ->
+      if !(ctrl.locked || form_errors())
         ctrl.locked = true
-        working_header = angular.extend(angular.copy(header),ctrl.data.activeHeader)
         Header.update(
-          working_header,
+          ctrl.data.activeHeader,
           (header)->
+            ctrl.clear()
             ctrl.locked = false
           ,
           (error)->
             console.log("update_error:",error)
+            ctrl.clear()
             ctrl.locked = false
         )
         ctrl.clear()
 
-    delete: (index,header,headers)->
-      Header.delete(
-        header, 
-        (header)->
-          headers ||= ctrl.data.headers
-          headers.splice(index,1)
-        ,
-        (error)->
-          console.log("delete_error:",error)
-      )
-      ctrl.clear()
+    delete: (header,create_new)->
+      if !!header && !ctrl.locked
+        Header.delete(
+          header, 
+          (header)->
+            ctrl.clear()
+            ctrl.data.header = null
+            ctrl.rest.new() if create_new
+            ctrl.locked = false
+          ,
+          (error)->
+            console.log("delete_error:",error)
+            ctrl.clear()
+            ctrl.rest.new() if create_new
+            ctrl.locked = false
+        )
 
 
   # scope methods 
@@ -99,10 +111,12 @@ AngularBlogApp.controller 'HeadersController', ($scope,Header) ->
     ctrl.data.edit_index = null
     ctrl.data.creating_new_header = false
 
-  ctrl.isEditing = (index,parent_id)->
-    (index == ctrl.data.edit_index) && (parent_id == ctrl.data.parent_id)
+  ctrl.isEditing = ()->
+    !!ctrl.data.activeHeader && !!ctrl.data.activeHeader.id
 
   # internal
+  form_errors = ->
+    ctrl.form.content.$error.required
 
   # return
   return

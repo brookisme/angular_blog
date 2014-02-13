@@ -21,6 +21,10 @@ module AngularBlog
     def create
       @header = Header.new(header_params)
 
+      unless params[:component_id].blank?
+        @header.component = Component.where(id: params[:component_id]).last
+      end
+      
       respond_to do |format|
         if @header.save
           format.html { redirect_to @header, notice: 'Header was successfully created.' }
@@ -61,8 +65,8 @@ module AngularBlog
       params.require(:header).permit(
         :id,  
         :_destroy, 
-        :is_sticky,
-        :subject
+        :content,
+        :size
       )
     end
   end

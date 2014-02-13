@@ -36,7 +36,7 @@ AngularBlogApp.controller 'CommentsController', ($scope,Comment) ->
       ctrl.data.creating_new_comment = true
 
     create: ->
-      if !(ctrl.locked || ctrl.form_errors())
+      if !(ctrl.locked || form_errors())
         ctrl.locked = true
         working_comment = angular.copy(ctrl.data.activeComment)
         working_comment.post_id = ctrl.data.comment_post.id
@@ -61,7 +61,7 @@ AngularBlogApp.controller 'CommentsController', ($scope,Comment) ->
       ctrl.data.activeComment = comment
 
     update: (index,comment)->
-      if !(ctrl.locked || ctrl.form.$error.required)
+      if !(ctrl.locked || form_errors())
         ctrl.locked = true
         working_comment = angular.extend(angular.copy(comment),ctrl.data.activeComment)
         Comment.update(
@@ -118,10 +118,9 @@ AngularBlogApp.controller 'CommentsController', ($scope,Comment) ->
   ctrl.isEditing = (index,post_id)->
     (index == ctrl.data.edit_index) && (post_id == ctrl.data.comment_post.id)
   
-  ctrl.form_errors = ->
-    ctrl.form.email.$error.required || ctrl.form.email.$error.email || ctrl.form.content.$error.required || ctrl.form.content.$error.minlength 
-
   # internal
+  form_errors = ->
+    ctrl.form.email.$error.required || ctrl.form.email.$error.email || ctrl.form.content.$error.required || ctrl.form.content.$error.minlength 
 
   # return
   return

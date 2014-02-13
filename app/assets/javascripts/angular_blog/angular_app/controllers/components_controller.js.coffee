@@ -5,7 +5,7 @@ AngularBlogApp.controller 'ComponentsController', ($scope,Component) ->
   ctrl.data = {}
 
   # vars 
-  ctrl.data.postable_types = [
+  ctrl.types = [
     "Header",
     "Blurb",
     "Image",
@@ -16,7 +16,6 @@ AngularBlogApp.controller 'ComponentsController', ($scope,Component) ->
   ctrl.init = (post) ->
     ctrl.data.component_post = post
     ctrl.setComponents(post.components || [])
-    console.log("POST",post,post.components)
 
   # rest methods
   ctrl.rest =
@@ -29,27 +28,30 @@ AngularBlogApp.controller 'ComponentsController', ($scope,Component) ->
       Component.get({id: component_id}).$promise.then (component) ->
         ctrl.data.component = component
 
-    new: ()->
+    new: ->
       ctrl.clear()
       ctrl.data.activeComponent = {}
       ctrl.data.creating_new_component = true
 
-    create: ->
+    create: (create_new)->
       if !(ctrl.locked)
         ctrl.locked = true
         working_component = angular.copy(ctrl.data.activeComponent)
         working_component.post_id = ctrl.data.component_post.id
+        working_component.postable_type = postable_type(ctrl.data.activeComponent.type)
         Component.save(
           working_component,
           (component)->
             ctrl.data.component_post.components ||= []
             ctrl.data.component_post.components.push(component)
             ctrl.clear()
+            ctrl.rest.new() if create_new
             ctrl.locked = false
           ,
           (error)->
             console.log("create_error:",error)
             ctrl.clear()
+            ctrl.rest.new() if create_new
             ctrl.locked = false
         )
 
@@ -58,33 +60,42 @@ AngularBlogApp.controller 'ComponentsController', ($scope,Component) ->
       ctrl.clear()
       ctrl.data.edit_index = index
       ctrl.data.activeComponent = component
+      console.log(ctrl.data)
 
-    update: (index,component)->
+    update: (component,create_new)->
       if !(ctrl.locked || ctrl.form.$error.required)
         ctrl.locked = true
-        working_component = angular.extend(angular.copy(component),ctrl.data.activeComponent)
+        working_component = angular.copy(ctrl.data.activeComponent)
         Component.update(
           working_component,
           (component)->
+            ctrl.rest.new() if create_new
             ctrl.locked = false
           ,
           (error)->
             console.log("update_error:",error)
+            ctrl.rest.new() if create_new
             ctrl.locked = false
         )
         ctrl.clear()
 
-    delete: (index,component,components)->
-      Component.delete(
-        component, 
-        (component)->
-          components ||= ctrl.data.components
-          components.splice(index,1)
-        ,
-        (error)->
-          console.log("delete_error:",error)
-      )
-      ctrl.clear()
+    delete: (index,component,create_new)->
+      if !ctrl.locked
+        Component.delete(
+          component, 
+          (component)->
+            ctrl.data.components ||= []
+            ctrl.data.components.splice(index,1)
+            ctrl.clear()
+            ctrl.rest.new() if create_new
+            ctrl.locked = false
+          ,
+          (error)->
+            console.log("delete_error:",error)
+            ctrl.clear()
+            ctrl.rest.new() if create_new
+            ctrl.locked = false
+        )
 
 
   # scope methods 
@@ -110,10 +121,12 @@ AngularBlogApp.controller 'ComponentsController', ($scope,Component) ->
   ctrl.isBlurb = (type)->
     type == "blurb"
 
-  ctrl.isEditing = (index,parent_id)->
-    (index == ctrl.data.edit_index) && (parent_id == ctrl.data.parent_id)
+  ctrl.isEditing = ->
+    (ctrl.data.edit_index == 0) || !!ctrl.data.edit_index
 
   # internal
+  postable_type = (type)->
+    "AngularBlog::" + type
 
   # return
   return

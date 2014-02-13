@@ -1,4 +1,23 @@
-%div{ ng_controller: "HeadersController as headers_ctrl", ng_init: "headers_ctrl.init(component)" }
-  %div{ class:"ab-header ab-size-{{header.size}}" }
-    %div{ ng_bind_html: "header.content" } 
-      {{ header.content }}
+.form{ ng_controller: "HeadersController as headers_ctrl", ng_init: "headers_ctrl.init(component)" }
+
+  / view
+  .form-row{ ng_if: "!(headers_ctrl.data.creating_new_header || headers_ctrl.idEditing())" }
+    .label-column
+    .input-column
+      %div{ ab_link_wrap: true, href: "{{headers_ctrl.data.header.component.link}}", class:"ab-header ab-size-{{headers_ctrl.data.header.size}}" }
+        %div{ ng_bind_html: "headers_ctrl.data.header.content" } 
+
+  .form-row{ ng_if: "!(headers_ctrl.data.creating_new_header || headers_ctrl.idEditing())", class:"ab-header ab-size-{{headers_ctrl.data.header.size}}" }
+    .label-column
+    .input-column
+      %a{ ng_click: "headers_ctrl.rest.edit(header)" } 
+        %i.fa.fa-pencil-square-o ? Edit
+      %a.delete{ ab_confirm: "Do you really want to delete \"{{headers_ctrl.data.header.content}}\"?", action: "headers_ctrl.rest.delete(header,true)" } 
+        %i.fa.fa-times Delete
+
+
+  / form
+  .parital{ ng_if: "headers_ctrl.data.creating_new_header || headers_ctrl.isEditing()", ab_partial: true, url: "headers/form", ng_init: "ctrl=headers_ctrl" }
+
+
+
