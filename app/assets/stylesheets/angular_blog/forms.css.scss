@@ -107,6 +107,18 @@ form {
   text-transform: uppercase;
   padding-bottom: 15px;
 }
+
+.input-column .input-header label {
+  display: inline;
+  position: relative;
+  top: 3px;
+  left: 0;
+  margin-right: 15px;
+}
+.input-column.bottom-spacer {
+  padding-bottom: 15px;
+}
+
 .form-row.repeater > .input-column > .repeater-header > .identity {
   position: relative;
   top: 2px;

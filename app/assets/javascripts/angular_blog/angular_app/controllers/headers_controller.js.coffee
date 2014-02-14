@@ -34,26 +34,24 @@ AngularBlogApp.controller 'HeadersController', ($scope,Header) ->
     new: ()->
       ctrl.clear()
       ctrl.data.activeHeader = {}
+      ctrl.data.header = ctrl.data.activeHeader
       ctrl.data.creating_new_header = true
+      console.log("new")
 
     create: ->
-      console.log("c1",ctrl.data.activeHeader)
       if !(ctrl.locked || form_errors())
         ctrl.locked = true
         working_header = angular.copy(ctrl.data.activeHeader)
         working_header.component_id = ctrl.data.header_component.id
-        console.log("c2",working_header)
-
         Header.save(
           working_header,
           (header)->
-            console.log("cs",header)
+            ctrl.data.header_component.postable = header
             ctrl.setHeader(header)
             ctrl.clear()
             ctrl.locked = false
           ,
           (error)->
-            console.log("ce",error)
             console.log("create_error:",error)
             ctrl.clear()
             ctrl.locked = false
@@ -63,6 +61,7 @@ AngularBlogApp.controller 'HeadersController', ($scope,Header) ->
     edit: (header) ->
       ctrl.clear()
       ctrl.data.activeHeader = header
+      ctrl.activeCopy = angular.copy(ctrl.data.activeHeader)
 
     update: ->
       if !(ctrl.locked || form_errors())
@@ -70,6 +69,8 @@ AngularBlogApp.controller 'HeadersController', ($scope,Header) ->
         Header.update(
           ctrl.data.activeHeader,
           (header)->
+            ctrl.data.header_component.postable = header
+            ctrl.setHeader(header)
             ctrl.clear()
             ctrl.locked = false
           ,
@@ -85,6 +86,7 @@ AngularBlogApp.controller 'HeadersController', ($scope,Header) ->
         Header.delete(
           header, 
           (header)->
+            ctrl.data.header_component.postable = null
             ctrl.clear()
             ctrl.data.header = null
             ctrl.rest.new() if create_new
@@ -99,11 +101,15 @@ AngularBlogApp.controller 'HeadersController', ($scope,Header) ->
 
 
   # scope methods 
-  ctrl.setHeader = (header)->
+  ctrl.setHeader = (header,activate)->
     ctrl.data.header = header
 
   ctrl.setHeaders = (headers)->
     ctrl.data.headers = headers
+
+  ctrl.reset = ->
+    ctrl.data.activeHeader = angular.extend(ctrl.data.activeHeader,ctrl.activeCopy)
+    ctrl.clear()
 
   ctrl.clear = ->
     ctrl.data.parent_id = null

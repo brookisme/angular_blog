@@ -1,0 +1,16 @@
+%div{ ng_init: "ctrl.rest.new()" } 
+  %div{ ng_if: "!!ctrl.data.creating_new_component", ab_partial: true, url: "components/form", ng_init: "ctrl.rest.new()" }   
+
+.repeater{ ng_repeat: "component in ctrl.data.component_post.components" }
+  %div{ ng_if: "ctrl.isEditing(component.id)", ab_partial: true, url: "components/form"  }
+  %div{ ng_if: "!ctrl.isEditing(component.id)", ab_partial: true, url: "components/component_edit" }
+  
+  /postables
+  %div{ ng_if:"component.type=='Header'", ng_controller: "HeadersController as headers_ctrl", ng_init: "headers_ctrl.init(component)" }
+    %div{ ng_if: "ctrl.isEditing(component.id) || !(!component.postable.id || headers_ctrl.isEditing(component.postable.id))", ab_partial: true, url: "headers/header_edit", ng_init: "ctrl=headers_ctrl" }
+    %div{ ng_if: "!ctrl.isEditing(component.id) && (!component.postable.id || headers_ctrl.isEditing(component.postable.id))", ab_partial: true, url: "headers/form", ng_init: "ctrl=headers_ctrl" }
+    
+  
+  / %div{ ng_if:"component.postable_type=='AngularBlog::Blurb'", ab_partial: true, url: "blurbs/form", ng_init: "blurb=component.postable" }
+  / %div{ ng_if:"component.postable_type=='AngularBlog::Image'", ab_partial: true, url: "images/form", ng_init: "image=component.postable" }
+  / %div{ ng_if:"component.postable_type=='AngularBlog::Video'", ab_partial: true, url: "videos/form", ng_init: "video=component.postable" }

@@ -1,20 +1,23 @@
-.form-row{ ng_init: "ctrl.rest.new()" }
-  .label-column
-    %label
-  .input-column
-    %select{ ng_model: "ctrl.data.activeComponent.type", ng_options:"type for type in ctrl.types" }
-
 .form
   %form.components_form{ name: "ctrl.form" }
+
+    .form-row.repeater{ ng_if: "!ctrl.data.activeComponent.id || !ctrl.data.activeComponent.type" }
+      .label-column
+        %label
+      .input-column
+        .input-header
+          Component ({{ ctrl.data.activeComponent.id || "new" }},{{ctrl.data.activeComponent.type || "unspecified" }})
+        %select{ ng_model: "ctrl.data.activeComponent.type", ng_options:"type for type in ctrl.types" }
+
     .form-row{ ng_if: "!!ctrl.data.activeComponent.type" }
       .label-column
         %label 
       .input-column
         .input-header
-          Component ({{ ctrl.data.activeComponent.id || "new" }})
+          Component ({{ ctrl.data.activeComponent.id || "new" }},{{ctrl.data.activeComponent.type || "unspecified" }})
         .inner-form-section.toggler{ ng_if: "ctrl.data.showing_options" }
           %a.cancel{ ng_click: "ctrl.showOptions(false)", class: "component-tool"  }
-            %span.toggler_label show options
+            %span.toggler_label hide options
             %i.fa.fa-minus-square-o
           .option 
             %input{ ng_model: "ctrl.data.activeComponent.link", name: "link", type: "text", placeholder: "link: http://laborvoices.com/press" }
@@ -25,21 +28,19 @@
 
         .inner-form-section.toggler{ ng_if: "!ctrl.data.showing_options" }
           %a{ ng_click: "ctrl.showOptions()", class: "component-tool"  }
-            %span.toggler_label hide options
+            %span.toggler_label show options
             %i.fa.fa-plus-square-o
-
-        .in-form-tools
-          %a{ ng_if: "ctrl.data.creating_new_component", ng_click: "ctrl.rest.create(true)" } 
-            %span.inner-tool Create
-            %i.fa.fa-check-square-o.fa-2x
-          %a{ ng_if: "ctrl.isEditing()", ng_click: "ctrl.rest.update()" } 
-            %span.inner-tool Update
-            %i.fa.fa-check-square-o.fa-2x
-          %a.cancel{ ng_if: "ctrl.isEditing() || ctrl.data.creating_new_component", ng_click: "ctrl.rest.new()" }
-            %span.inner-tool Cancel
-            %i.fa.fa-minus-square-o.fa-2x
-
-
-.partial{ ng_if: "ctrl.data.component_post.components.length>0", ab_partial: true, url: "components/list"  }
-
-
+    
+    .form-row{ ng_if: "!!ctrl.data.activeComponent.type" }
+      .label-column
+        %label 
+      .input-column
+        %a{ ng_if: "ctrl.data.creating_new_component", ng_click: "ctrl.rest.create(true)" } 
+          %span.inner-tool Create
+          %i.fa.fa-check-square-o.fa-2x
+        %a{ ng_if: "ctrl.isEditing(ctrl.data.activeComponent.id)", ng_click: "ctrl.rest.update($index,true)" } 
+          %span.inner-tool Update
+          %i.fa.fa-check-square-o.fa-2x
+        %a.cancel{ ng_if: "ctrl.isEditing(ctrl.data.activeComponent.id) || ctrl.data.creating_new_component", ng_click: "ctrl.reset();ctrl.rest.new()" }
+          %span.inner-tool Cancel
+          %i.fa.fa-minus-square-o.fa-2x

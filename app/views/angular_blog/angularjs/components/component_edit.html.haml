@@ -1,0 +1,10 @@
+.form-row.repeater
+  .label-column
+  .input-column
+    .input-header 
+      %label Component ({{ component.id || "new" }},{{ component.type || "unspecified" }})
+      %a{ ng_click: "ctrl.rest.edit($index,component)" } 
+        %i.fa.fa-pencil-square-o Edit
+      %a.delete{ ab_confirm: "Do you really want to delete this component?", action: "ctrl.rest.delete($index,component,true)" }
+        %i.fa.fa-times Delete
+    

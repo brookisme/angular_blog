@@ -1,15 +1,2 @@
-
-.form-row.repeater
-  .label-column
-    %a{ ng_click: "ctrl.rest.edit($index,component)" } 
-      %i.fa.fa-pencil-square-o Edit
-    %a.delete{ ab_confirm: "Do you really want to delete this component?", action: "ctrl.rest.delete($index,component,true)" } 
-      %i.fa.fa-times Delete
-  .input-column
-    .input-header id:{{ component.id }} type:{{component.type}}
-
-%div{ class: "ab-component {{component.css_string}}" }
-  %div{ ng_if:"component.postable_type=='AngularBlog::Header'", ab_partial: true, url: "headers/header", ng_init: "header=component.postable"}
-  %div{ ng_if:"component.postable_type=='AngularBlog::Blurb'", ab_partial: true, url: "blurbs/blurb", ng_init: "blurb=component.postable" }
-  %div{ ng_if:"component.postable_type=='AngularBlog::Image'", ab_partial: true, url: "images/image", ng_init: "image=component.postable" }
-  %div{ ng_if:"component.postable_type=='AngularBlog::Video'", ab_partial: true, url: "videos/video", ng_init: "video=component.postable" }
+  /postables
+  %div{ ng_if:"component.postable_type=='AngularBlog::Header'", ng_controller: "HeadersController as headers_ctrl", ng_init: "headers_ctrl.init(component);ctrl=headers_ctrl", ab_partial: true, url: "headers/header"  }

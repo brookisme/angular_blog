@@ -1,0 +1,15 @@
+%div{ ng_if: "!!ctrl.data.header.id" }
+  .form-row
+    .label-column
+    .input-column
+      .parital{ ab_partial: true, url: "headers/header" }
+
+  .form-row
+    .label-column
+    .input-column.bottom-spacer
+      %a{ ng_click: "ctrl.rest.edit(ctrl.data.header)" } 
+        %i.fa.fa-pencil-square-o Edit
+      %a.delete{ ab_confirm: "Do you really want to delete \"{{ctrl.data.header.content}}\"?", action: "ctrl.rest.delete(ctrl.data.header,true)" } 
+        %i.fa.fa-times Delete
+
+

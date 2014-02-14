@@ -1,4 +1,3 @@
-%h1 in form! {{ctrl.data.activeHeader.id}}
 %form{ name: "ctrl.form" }
   .form-row
     .label-column
@@ -28,5 +27,5 @@
         %i.fa.fa-pencil-square-o Create
       %a{ ng_if: "headers_ctrl.isEditing()", ng_click: "headers_ctrl.rest.update(header,true)" } 
         %i.fa.fa-pencil-square-o Update
-      %a.delete{ ng_click: "headers_ctrl.clear()" } 
+      %a.delete{ ng_if: "headers_ctrl.isEditing()", ng_click: "headers_ctrl.reset()" } 
         %i.fa.fa-times Cancel

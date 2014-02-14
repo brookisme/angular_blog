@@ -39,7 +39,8 @@
           .input-column.checkbox
             %input{ ng_model: "ctrl.data.activePost.comments_closed", type: "checkbox" }
             %label comments closed
-
-  .partial{ ng_controller: "ComponentsController as components_ctrl", ng_init: "components_ctrl.init(ctrl.data.activePost);ctrl=components_ctrl", ab_partial: true, url: "components/form" }          
+  
+  %div{ ng_controller: "ComponentsController as components_ctrl", ab_partial: true, url: "components/form_list", ng_init: "components_ctrl.init(ctrl.data.activePost);ctrl=components_ctrl"  }
+     
 
 

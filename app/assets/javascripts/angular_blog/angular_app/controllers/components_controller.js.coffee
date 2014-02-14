@@ -60,15 +60,18 @@ AngularBlogApp.controller 'ComponentsController', ($scope,Component) ->
       ctrl.clear()
       ctrl.data.edit_index = index
       ctrl.data.activeComponent = component
-      console.log(ctrl.data)
+      ctrl.activeCopy = angular.copy(ctrl.data.activeComponent)
 
-    update: (component,create_new)->
+    update: (index,create_new)->
       if !(ctrl.locked || ctrl.form.$error.required)
         ctrl.locked = true
         working_component = angular.copy(ctrl.data.activeComponent)
+        working_component.postable_type = postable_type(ctrl.data.activeComponent.type)
         Component.update(
           working_component,
           (component)->
+            ctrl.data.component_post.components ||= []
+            ctrl.data.component_post.components.splice(index,1,component)
             ctrl.rest.new() if create_new
             ctrl.locked = false
           ,
@@ -108,6 +111,10 @@ AngularBlogApp.controller 'ComponentsController', ($scope,Component) ->
   ctrl.showOptions = (show=true) ->
     ctrl.data.showing_options = show
 
+  ctrl.reset = ->
+    ctrl.data.activeComponent = angular.extend(ctrl.data.activeComponent,ctrl.activeCopy)
+    ctrl.clear()
+
   ctrl.clear = ->
     ctrl.data.parent_id = null
     ctrl.data.activeComponent = null
@@ -121,8 +128,8 @@ AngularBlogApp.controller 'ComponentsController', ($scope,Component) ->
   ctrl.isBlurb = (type)->
     type == "blurb"
 
-  ctrl.isEditing = ->
-    (ctrl.data.edit_index == 0) || !!ctrl.data.edit_index
+  ctrl.isEditing = (component_id)->
+    !ctrl.data.creating_new_component && !!ctrl.data.activeComponent && ctrl.data.activeComponent.id == component_id
 
   # internal
   postable_type = (type)->
