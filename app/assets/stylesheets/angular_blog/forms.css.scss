@@ -58,7 +58,7 @@ form {
 
 .form-row .input-column {
   width: $input_column_width;
-  padding: 5px 0 0 $column_spacing;
+  padding: 0 0 15px $column_spacing;
 }
 
 .form-row .input-column input[type='text'],
@@ -99,13 +99,12 @@ form {
   height: 100px;
 }
 
-.form-row.repeater > .input-column {
+.input-column > .input-header {
+  width: 100%;
   border-top: 1px dotted #ccc;
-}
-
-.input-column .input-header {
   text-transform: uppercase;
   padding-bottom: 15px;
+  padding-top: 15px;
 }
 
 .input-column .input-header label {
@@ -118,12 +117,9 @@ form {
 .input-column.bottom-spacer {
   padding-bottom: 15px;
 }
-
-.form-row.repeater > .input-column > .repeater-header > .identity {
-  position: relative;
-  top: 2px;
-  left: 0;
-  margin-right: 10px;
+.active .input-column {
+  border-left: 8px solid #090;
+  background-color: #f5fff5;
 }
 
 /*

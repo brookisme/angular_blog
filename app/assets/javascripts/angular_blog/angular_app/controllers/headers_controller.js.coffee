@@ -36,7 +36,6 @@ AngularBlogApp.controller 'HeadersController', ($scope,Header) ->
       ctrl.data.activeHeader = {}
       ctrl.data.header = ctrl.data.activeHeader
       ctrl.data.creating_new_header = true
-      console.log("new")
 
     create: ->
       if !(ctrl.locked || form_errors())
