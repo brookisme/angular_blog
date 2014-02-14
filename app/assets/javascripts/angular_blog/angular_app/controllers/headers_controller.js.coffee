@@ -1,4 +1,3 @@
-
 AngularBlogApp.controller 'HeadersController', ($scope,DataBridge,Header) ->
   # setup
   ctrl = this

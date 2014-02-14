@@ -1,16 +1,14 @@
-
 AngularBlogApp.controller 'ImagesController', ($scope,DataBridge,Image) ->
   # setup
   ctrl = this
   ctrl.data = {}
   ctrl.bridge = DataBridge.bridge
 
-  # vars 
-
-
   # init
   ctrl.init = (component) ->
     ctrl.data.image_component = component
+    ctrl.setImage(component.postable)
+    ctrl.rest.new() if !ctrl.data.image
 
   # rest methods
   ctrl.rest =
@@ -26,17 +24,19 @@ AngularBlogApp.controller 'ImagesController', ($scope,DataBridge,Image) ->
     new: ()->
       ctrl.clear()
       ctrl.data.activeImage = {}
+      ctrl.data.image = ctrl.data.activeImage
       ctrl.data.creating_new_image = true
 
     create: ->
-      if !(ctrl.locked || ctrl.form.$error.required)
+      if !(ctrl.locked || form_errors())
         ctrl.locked = true
         working_image = angular.copy(ctrl.data.activeImage)
+        working_image.component_id = ctrl.data.image_component.id
         Image.save(
           working_image,
           (image)->
-            ctrl.data.images ||= []
-            ctrl.data.images.push(image)
+            ctrl.data.image_component.postable = image
+            ctrl.setImage(image)
             ctrl.clear()
             ctrl.locked = false
           ,
@@ -47,45 +47,61 @@ AngularBlogApp.controller 'ImagesController', ($scope,DataBridge,Image) ->
         )
 
 
-    edit: (index,image) ->
+    edit: (image) ->
       ctrl.clear()
-      ctrl.data.edit_index = index
       ctrl.data.activeImage = image
+      ctrl.activeCopy = angular.copy(ctrl.data.activeImage)
 
-    update: (index,image)->
-      if !(ctrl.locked || ctrl.form.$error.required)
+    update: ->
+      if !(ctrl.locked || form_errors())
         ctrl.locked = true
-        working_image = angular.extend(angular.copy(image),ctrl.data.activeImage)
         Image.update(
-          working_image,
+          ctrl.data.activeImage,
           (image)->
+            ctrl.data.image_component.postable = image
+            ctrl.setImage(image)
+            ctrl.clear()
             ctrl.locked = false
           ,
           (error)->
             console.log("update_error:",error)
+            ctrl.clear()
             ctrl.locked = false
         )
         ctrl.clear()
 
-    delete: (index,image,images)->
-      Image.delete(
-        image, 
-        (image)->
-          images ||= ctrl.data.images
-          images.splice(index,1)
-        ,
-        (error)->
-          console.log("delete_error:",error)
-      )
-      ctrl.clear()
+    delete: (image,create_new)->
+      if !!image && !ctrl.locked
+        Image.delete(
+          image, 
+          (image)->
+            ctrl.data.image_component.postable = null
+            ctrl.clear()
+            ctrl.data.image = null
+            ctrl.rest.new() if create_new
+            ctrl.locked = false
+          ,
+          (error)->
+            console.log("delete_error:",error)
+            ctrl.clear()
+            ctrl.rest.new() if create_new
+            ctrl.locked = false
+        )
 
 
   # scope methods 
-  ctrl.setImage = (image)->
+  ctrl.setImage = (image,activate)->
     ctrl.data.image = image
 
   ctrl.setImages = (images)->
     ctrl.data.images = images
+
+  ctrl.showOptions = (show=true) ->
+    ctrl.data.showing_options = show
+
+  ctrl.reset = ->
+    ctrl.data.activeImage = angular.extend(ctrl.data.activeImage,ctrl.activeCopy)
+    ctrl.clear()
 
   ctrl.clear = ->
     ctrl.data.parent_id = null
@@ -93,10 +109,12 @@ AngularBlogApp.controller 'ImagesController', ($scope,DataBridge,Image) ->
     ctrl.data.edit_index = null
     ctrl.data.creating_new_image = false
 
-  ctrl.isEditing = (index,parent_id)->
-    (index == ctrl.data.edit_index) && (parent_id == ctrl.data.parent_id)
+  ctrl.isEditing = ()->
+    !!ctrl.data.activeImage && !!ctrl.data.activeImage.id
 
   # internal
+  form_errors = ->
+    ctrl.form.src.$error.required
 
   # return
   return

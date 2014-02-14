@@ -15,6 +15,12 @@
     %div{ ng_if: "ctrl.isEditing(component.id) || !(!component.postable.id || blurbs_ctrl.isEditing(component.postable.id))", ab_partial: true, url: "blurbs/blurb_edit", ng_init: "ctrl=blurbs_ctrl" }
     %div{ ng_if: "!ctrl.isEditing(component.id) && (!component.postable.id || blurbs_ctrl.isEditing(component.postable.id))", ab_partial: true, url: "blurbs/form", ng_init: "ctrl=blurbs_ctrl" }
 
+  /image
+  %div{ ng_if:"component.type=='Image'", ng_controller: "ImagesController as images_ctrl", ng_init: "images_ctrl.init(component)" }
+    %div{ ng_if: "ctrl.isEditing(component.id) || !(!component.postable.id || images_ctrl.isEditing(component.postable.id))", ab_partial: true, url: "images/image_edit", ng_init: "ctrl=images_ctrl" }
+    %div{ ng_if: "!ctrl.isEditing(component.id) && (!component.postable.id || images_ctrl.isEditing(component.postable.id))", ab_partial: true, url: "images/form", ng_init: "ctrl=images_ctrl" }
 
-  / %div{ ng_if:"component.postable_type=='AngularBlog::Image'", ab_partial: true, url: "images/form", ng_init: "image=component.postable" }
-  / %div{ ng_if:"component.postable_type=='AngularBlog::Video'", ab_partial: true, url: "videos/form", ng_init: "video=component.postable" }
+  /video
+  %div{ ng_if:"component.type=='Video'", ng_controller: "VideosController as videos_ctrl", ng_init: "videos_ctrl.init(component)" }
+    %div{ ng_if: "ctrl.isEditing(component.id) || !(!component.postable.id || videos_ctrl.isEditing(component.postable.id))", ab_partial: true, url: "videos/video_edit", ng_init: "ctrl=videos_ctrl" }
+    %div{ ng_if: "!ctrl.isEditing(component.id) && (!component.postable.id || videos_ctrl.isEditing(component.postable.id))", ab_partial: true, url: "videos/form", ng_init: "ctrl=videos_ctrl" }

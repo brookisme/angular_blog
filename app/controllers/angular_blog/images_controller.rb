@@ -21,6 +21,10 @@ module AngularBlog
     def create
       @image = Image.new(image_params)
 
+      unless params[:component_id].blank?
+        @image.component = Component.where(id: params[:component_id]).last
+      end
+
       respond_to do |format|
         if @image.save
           format.html { redirect_to @image, notice: 'Image was successfully created.' }
@@ -61,8 +65,8 @@ module AngularBlog
       params.require(:image).permit(
         :id,  
         :_destroy, 
-        :is_sticky,
-        :subject
+        :src,
+        :css_string
       )
     end
   end

@@ -1,0 +1,37 @@
+.active
+  %form{ name: "ctrl.form" }
+    .form-row
+      .label-column
+        %label 
+      .input-column
+        .input-header
+          Image ({{ctrl.data.activeImage.id || "new"}})
+
+        .inner-form-section.toggler{ ng_if: "ctrl.data.showing_options" }
+          %a.cancel{ ng_click: "ctrl.showOptions(false)", class: "component-tool"  }
+            %span.toggler_label hide option
+            %i.fa.fa-minus-square-o
+          .option 
+            %input{ ng_model: "ctrl.data.activeImage.css_class", name: "css_class", type: "text", placeholder: "css class: check with admin for options" }
+
+        .inner-form-section.toggler{ ng_if: "!ctrl.data.showing_options" }
+          %a{ ng_click: "ctrl.showOptions()", class: "component-tool"  }
+            %span.toggler_label show option
+            %i.fa.fa-plus-square-o
+
+    .form-row
+      .label-column
+        %label Source
+      .input-column
+        %input{ ng_model: "ctrl.data.activeImage.src", name: "src", type: "text", placeholder: "image url: http://s3.amazonaws.com/.../worker.jpg", required: true }
+        %span.error{ ng_show: "ctrl.form.content.$error.required" } Required
+
+    .form-row
+      .label-column
+      .input-column
+        %a{ ng_if: "images_ctrl.data.creating_new_image", ng_click: "images_ctrl.rest.create()" } 
+          %i.fa.fa-pencil-square-o Create
+        %a{ ng_if: "images_ctrl.isEditing()", ng_click: "images_ctrl.rest.update(image,true)" } 
+          %i.fa.fa-pencil-square-o Update
+        %a.delete{ ng_if: "images_ctrl.isEditing()", ng_click: "images_ctrl.reset()" } 
+          %i.fa.fa-times Cancel
