@@ -1,2 +1,2 @@
-.youtube-container{ data: { width: "{{component.width || null}}", height: "{{component.height || null}}", video_identifier: "{{video.identifier}}"} }
-  %div{ id: "player_{{video.identifier}}", ng_init: "ctrl.youtube.init(video.identifier)"}
+.youtube-container{ data: { width: "{{component.width || null}}", height: "{{component.height || null}}", video_identifier: "{{ctrl.data.video.identifier}}"} }
+  %div{ id: "player_{{ctrl.data.video.identifier}}", ng_init: "ctrl.youtube.init(ctrl.data.video.identifier)"}
