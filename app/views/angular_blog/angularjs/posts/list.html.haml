@@ -1,10 +1,16 @@
-.editor-box
-  %span{ class: "post-tool" }
+.editor-box{ ng_if: "true" }
+
+  .post-tool
+    %a{ ng_click: "ctrl.bridge.toggleEditMode()", class: "pull-right" } 
+      %i.fa.fa-times-o.fa-2x Toggle Editor
+
+  .post-tool{ ng_if: "ctrl.bridge.edit_mode" }
     %a{ ng_if: "!ctrl.data.creating_new_post", ng_click: "ctrl.rest.new()", class: "pull-right" } 
       %i.fa.fa-pencil-square-o.fa-2x New Post!
-
+  
   .ease{ ng_if: "ctrl.data.creating_new_post" }
     .comment-new{ ab_partial: true, url: "posts/form" }
 
 .repeater.ease{ ng_repeat: "post in ctrl.data.posts" }
-  %div{ ab_partial: true, url: "posts/post" }
+  %div{ ng_if: "ctrl.bridge.edit_mode", ab_partial: true, url: "posts/post_edit" }  
+  %div{ ng_if: "!ctrl.bridge.edit_mode", ab_partial: true, url: "posts/post" }

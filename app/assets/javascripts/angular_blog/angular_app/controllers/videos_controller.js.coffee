@@ -1,10 +1,11 @@
 
-AngularBlogApp.controller 'VideosController', ($scope,Video,Youtube) ->
+AngularBlogApp.controller 'VideosController', ($scope,DataBridge,Video,Youtube) ->
   # setup
   ctrl = this
   ctrl.data = {}
   ctrl.youtube = Youtube
-  
+  ctrl.bridge = DataBridge.bridge
+
   # vars 
 
 

@@ -1,8 +1,9 @@
 
-AngularBlogApp.controller 'ImagesController', ($scope,Image) ->
+AngularBlogApp.controller 'ImagesController', ($scope,DataBridge,Image) ->
   # setup
   ctrl = this
   ctrl.data = {}
+  ctrl.bridge = DataBridge.bridge
 
   # vars 
 

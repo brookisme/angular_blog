@@ -1,10 +1,11 @@
 
-AngularBlogApp.controller 'CommentsController', ($scope,Comment) ->
+AngularBlogApp.controller 'CommentsController', ($scope,DataBridge,Comment) ->
   # setup
   ctrl = this
   ctrl.data = {}
   ctrl.data.comments = []
-
+  ctrl.bridge = DataBridge.bridge
+  
   # vars 
   ctrl.data.comment_types = [
     "Header",

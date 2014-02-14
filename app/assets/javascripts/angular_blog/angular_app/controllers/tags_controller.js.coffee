@@ -1,8 +1,9 @@
 
-AngularBlogApp.controller 'TagsController', ($scope,Tag) ->
+AngularBlogApp.controller 'TagsController', ($scope,DataBridge,Tag) ->
   # setup
   ctrl = this
   ctrl.data = {}
+  ctrl.bridge = DataBridge.bridge
 
   # vars 
 

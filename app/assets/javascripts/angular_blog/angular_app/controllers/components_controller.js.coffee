@@ -1,8 +1,9 @@
 
-AngularBlogApp.controller 'ComponentsController', ($scope,Component) ->
+AngularBlogApp.controller 'ComponentsController', ($scope,DataBridge,Component) ->
   # setup
   ctrl = this
   ctrl.data = {}
+  ctrl.bridge = DataBridge.bridge
 
   # vars 
   ctrl.types = [

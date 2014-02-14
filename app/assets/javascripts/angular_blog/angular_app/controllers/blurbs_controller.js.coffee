@@ -1,9 +1,10 @@
 
-AngularBlogApp.controller 'BlurbsController', ($scope,Blurb) ->
+AngularBlogApp.controller 'BlurbsController', ($scope,DataBridge,Blurb) ->
   # setup
   ctrl = this
   ctrl.data = {}
-
+  ctrl.bridge = DataBridge.bridge
+  
   # vars 
   ctrl.data.sizes = [
     "tiny",

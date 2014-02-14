@@ -1,8 +1,9 @@
 
-AngularBlogApp.controller 'HeadersController', ($scope,Header) ->
+AngularBlogApp.controller 'HeadersController', ($scope,DataBridge,Header) ->
   # setup
   ctrl = this
   ctrl.data = {}
+  ctrl.bridge = DataBridge.bridge
 
   # vars 
   ctrl.sizes = [

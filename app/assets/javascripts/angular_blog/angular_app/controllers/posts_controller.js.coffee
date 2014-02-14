@@ -1,8 +1,9 @@
 
-AngularBlogApp.controller 'PostsController', ($scope,Post) ->
+AngularBlogApp.controller 'PostsController', ($scope,DataBridge,Post) ->
   # setup
   ctrl = this
   ctrl.data = {}
+  ctrl.bridge = DataBridge.bridge
 
   # vars 
 
