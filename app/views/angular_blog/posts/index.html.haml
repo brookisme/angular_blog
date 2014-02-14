@@ -2,4 +2,5 @@
 #angular_blog{ "ng-app" => "AngularBlogApp" }
   %div{ class: "ng-cloak toggle tall" }
     %div{ ng_controller: "PostsController as posts_ctrl", ng_init: "posts_ctrl.setPosts(#{posts_json})" }
+      %div{ ab_partial: true, url: "posts/editor_header", ng_init: "ctrl=posts_ctrl"}
       %div{ ab_partial: true, url: "posts/list", ng_init: "ctrl=posts_ctrl"}

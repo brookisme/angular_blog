@@ -7,7 +7,7 @@ AngularBlogApp.directive "abPartial", ->
   transclude: true
   template: (el,attrs)->
     if !!attrs.url
-      path = 'templates/'+attrs.url+'.html'
+      path = '/blog/templates/'+attrs.url+'.html'
     if !!path
       '<div ng_include="\''+path+'\'"></div>'
     else

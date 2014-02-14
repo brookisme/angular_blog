@@ -5,7 +5,8 @@
       .author {{post.author}}
 
   .post-content.pull-left.ease
-    %h1.post-subject.ease{ ng_if: "post.display_subject" } {{post.subject}}
+    %h1.post-subject.ease{ ng_if: "post.display_subject" } 
+      %a{ href: "/blog/posts/{{post.id}}" } {{post.subject}}
     %div{ ng_controller: "ComponentsController as components_ctrl", ng_init: "components_ctrl.init(post);" }
       %div{ ab_partial: true, url: "components/list", ng_init: "ctrl=components_ctrl" }
   

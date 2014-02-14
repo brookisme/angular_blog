@@ -11,7 +11,7 @@
       .label-column
         %label Host
       .input-column
-        %select{ ng_model: "ctrl.data.activeHeader.host", name: "host", ng_options:"host for host in ctrl.hosts", required: true }
+        %select{ ng_model: "ctrl.data.activeVideo.host", name: "host", ng_options:"host for host in ctrl.hosts", required: true }
         %span.error{ ng_show: "ctrl.form.host.$error.required" } Required
 
     .form-row
@@ -26,7 +26,7 @@
       .input-column
         %a{ ng_if: "videos_ctrl.data.creating_new_video", ng_click: "videos_ctrl.rest.create()" } 
           %i.fa.fa-pencil-square-o Create
-        %a{ ng_if: "videos_ctrl.isEditing()", ng_click: "videos_ctrl.rest.update(video,true)" } 
+        %a{ ng_if: "videos_ctrl.isEditing()", ng_click: "videos_ctrl.rest.update()" } 
           %i.fa.fa-pencil-square-o Update
         %a.delete{ ng_if: "videos_ctrl.isEditing()", ng_click: "videos_ctrl.reset()" } 
           %i.fa.fa-times Cancel

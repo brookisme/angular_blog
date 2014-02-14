@@ -1,6 +1,6 @@
 .grouped-forms
   .form
-    %form.components_form{ name: "ctrl.form" }
+    %form.posts_form{ name: "ctrl.form" }
       .form-group
         .form-row
           .label-column 
@@ -13,7 +13,7 @@
               %a.cancel{ ng_if: "ctrl.data.creating_new_post", ng_click: "ctrl.clear()", class: "post-tool"  }
                 %i.fa.fa-minus-square-o
 
-        .form-row
+        .form-row.group-leader
           .label-column 
             %label subject
           .input-column
@@ -34,7 +34,7 @@
             %input{ ng_model: "ctrl.data.activePost.accept_comments", type: "checkbox" }
             %label accept comments
 
-        .form-row{ ng_if: "ctrl.data.activePost.accept_comments" }
+        .form-row.group-closer{ ng_if: "ctrl.data.activePost.accept_comments" }
           .label_column
           .input-column.checkbox
             %input{ ng_model: "ctrl.data.activePost.comments_closed", type: "checkbox" }

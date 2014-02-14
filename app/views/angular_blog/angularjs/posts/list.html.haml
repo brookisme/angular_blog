@@ -1,25 +1,5 @@
-.editor-box.clearfix{ ng_if: "true" }
-  .post-tools.pull-right
-    .post-tool
-      %a{ ng_click: "ctrl.bridge.toggleEditMode()"} 
-        %span Editor 
-        %i.fa.fa-minus-square-o.fa-2x{ ng_if: "ctrl.bridge.edit_mode" }
-        %i.fa.fa-plus-square-o.fa-2x{ ng_if: "!ctrl.bridge.edit_mode" }
-
-  .post-tools.pull-left{ ng_if: "ctrl.bridge.edit_mode" }
-    .post-tool{ng_if: "!ctrl.data.creating_new_post"}
-      %a{ ng_click: "ctrl.rest.new()"} 
-        %span New Post 
-        %i.fa.fa-pencil-square-o.fa-2x
-
-    .post-tool{ng_if: "ctrl.data.creating_new_post"}
-      %a.cancel{ ng_click: "ctrl.clear()"} 
-        %span.cancel Cancel Post 
-        %i.fa.fa-times.fa-2x
-
 .ease{ ng_if: "ctrl.bridge.edit_mode && ctrl.data.creating_new_post" }
   .comment-new{ ab_partial: true, url: "posts/form" }
 
 .repeater.ease{ ng_repeat: "post in ctrl.data.posts" }
-  %div{ ng_if: "ctrl.bridge.edit_mode", ab_partial: true, url: "posts/post_edit" }  
-  %div{ ng_if: "!ctrl.bridge.edit_mode", ab_partial: true, url: "posts/post" }
+  .comment-new{ ab_partial: true, url: "posts/item" }

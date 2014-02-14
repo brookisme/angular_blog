@@ -29,11 +29,17 @@ form {
 }
 
 .form-row .section-header {
-  font-size: 12px;
-  font-weight: bold;
+  font-size: 16px;
   color: #666;
   margin-bottom: 10px;
   text-transform: uppercase;
+  padding-bottom: 20px;
+}
+.form-row .section-header > span {
+  position: relative;
+  top: 2px;
+  left: 0;
+  margin-right: 5px;
 }
 
 .form-row .section-header.subsection {
@@ -121,6 +127,20 @@ form {
   background-color: #f5fff5;
 }
 
+.group-leader > .label-column,
+.group-leader > .input-column {
+  padding-bottom: 0;
+}
+
+.form-row.group-closer .label-column,
+.form-row.group-closer .input-column,
+.form-row.group-closer .input-column.checkbox {
+  padding-bottom: 20px;
+}
+
+.input-column a.tool {
+  margin-right: 15px;
+}
 /*
 *
 * elements

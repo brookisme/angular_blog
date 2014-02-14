@@ -37,7 +37,7 @@ AngularBlogApp.controller 'PostsController', ($scope,DataBridge,Post) ->
           working_post,
           (post)->
             ctrl.data.posts ||= []
-            ctrl.data.posts.push(post)
+            ctrl.data.posts.splice(0,0,post)
             ctrl.clear()
             ctrl.locked = false
           ,
@@ -89,7 +89,6 @@ AngularBlogApp.controller 'PostsController', ($scope,DataBridge,Post) ->
     ctrl.data.posts = posts
 
   ctrl.newComponent = ->
-    console.log("add component")
     ctrl.data.adding_component = true
 
   ctrl.clear = ->

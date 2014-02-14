@@ -26,7 +26,7 @@
       .input-column
         %a{ ng_if: "headers_ctrl.data.creating_new_header", ng_click: "headers_ctrl.rest.create()" } 
           %i.fa.fa-pencil-square-o Create
-        %a{ ng_if: "headers_ctrl.isEditing()", ng_click: "headers_ctrl.rest.update(header,true)" } 
+        %a{ ng_if: "headers_ctrl.isEditing()", ng_click: "headers_ctrl.rest.update()" } 
           %i.fa.fa-pencil-square-o Update
         %a.delete{ ng_if: "headers_ctrl.isEditing()", ng_click: "headers_ctrl.reset()" } 
           %i.fa.fa-times Cancel
