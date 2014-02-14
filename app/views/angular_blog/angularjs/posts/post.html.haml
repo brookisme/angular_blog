@@ -1,4 +1,4 @@
-%div{ class: "ab-post post-index-{{$index}} clearfix" }
+.post{ ng_if: "!ctrl.preview[$index]", class: "ab-post post-index-{{$index}} clearfix" }
   .post-data.pull-right
     .post-details
       .timestamp {{post.timestamp}}
@@ -11,3 +11,6 @@
   
     %div{ ng_if: "post.accept_comments", ng_controller: "CommentsController as comments_ctrl", ng_init: "comments_ctrl.init(post);" }
       .post-comments{  ab_partial: true, url: "comments/list", ng_init: "ctrl=comments_ctrl" }
+
+
+.post-preview{ ng_if: "ctrl.preview[$index]", class: "ab-post post-index-{{$index}} clearfix", ab_post_preview: "{{post}}" }

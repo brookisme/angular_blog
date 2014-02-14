@@ -1,5 +1,4 @@
-.editor-box{ ng_if: "true" }
-
+.editor-box.clearfix{ ng_if: "true" }
   .post-tools.pull-right
     .post-tool
       %a{ ng_click: "ctrl.bridge.toggleEditMode()"} 
@@ -16,10 +15,10 @@
     .post-tool{ng_if: "ctrl.data.creating_new_post"}
       %a.cancel{ ng_click: "ctrl.clear()"} 
         %span.cancel Cancel Post 
-        %i.fa.fa-times-o.fa-2x
+        %i.fa.fa-times.fa-2x
 
-  .ease{ ng_if: "ctrl.bridge.edit_mode && ctrl.data.creating_new_post" }
-    .comment-new{ ab_partial: true, url: "posts/form" }
+.ease{ ng_if: "ctrl.bridge.edit_mode && ctrl.data.creating_new_post" }
+  .comment-new{ ab_partial: true, url: "posts/form" }
 
 .repeater.ease{ ng_repeat: "post in ctrl.data.posts" }
   %div{ ng_if: "ctrl.bridge.edit_mode", ab_partial: true, url: "posts/post_edit" }  

@@ -4,6 +4,7 @@ AngularBlogApp.controller 'PostsController', ($scope,DataBridge,Post) ->
   ctrl = this
   ctrl.data = {}
   ctrl.bridge = DataBridge.bridge
+  ctrl.preview = {}
 
   # vars 
 
@@ -97,6 +98,9 @@ AngularBlogApp.controller 'PostsController', ($scope,DataBridge,Post) ->
     ctrl.data.edit_index = null
     ctrl.data.adding_component = false
     ctrl.data.creating_new_post = false
+
+  ctrl.togglePreview = (index)->
+    ctrl.preview[index] = !ctrl.preview[index]
 
   ctrl.isEditing = (index,post_id)->
     if !!ctrl.data.activePost

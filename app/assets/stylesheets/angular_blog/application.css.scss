@@ -63,6 +63,17 @@ body {
   text-transform: uppercase;
   margin-right: 4px;
 }
+
+.preview_subject {
+  font-weight: bold;
+}
+.preview_component {
+  margin-left: 5px;
+}
+.preview_component:after {
+  content: "...";
+}
+
 /**
 *
 * Header
