@@ -3,6 +3,7 @@
 
 %div{ ng_if:"component.postable_type=='AngularBlog::Blurb'", ng_controller: "BlurbsController as blurbs_ctrl", ng_init: "blurbs_ctrl.init(component);ctrl=blurbs_ctrl", ab_partial: true, url: "blurbs/blurb"  }
 
+%div{ ng_if:"component.postable_type=='AngularBlog::Image'", ng_controller: "ImagesController as images_ctrl", ng_init: "images_ctrl.init(component);ctrl=images_ctrl", ab_partial: true, url: "headers/header"  }
+
 %div{ ng_if:"component.postable_type=='AngularBlog::Video'", ng_controller: "VideosController as videos_ctrl", ng_init: "videos_ctrl.init(component);ctrl=videos_ctrl", ab_partial: true, url: "videos/video"  }
 
-%div{ ng_if:"component.postable_type=='AngularBlog::Image'", ng_controller: "ImagesController as images_ctrl", ng_init: "images_ctrl.init(component);ctrl=images_ctrl", ab_partial: true, url: "headers/header"  }

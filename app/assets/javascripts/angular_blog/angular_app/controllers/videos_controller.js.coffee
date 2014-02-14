@@ -1,4 +1,3 @@
-
 AngularBlogApp.controller 'VideosController', ($scope,DataBridge,Video,Youtube) ->
   # setup
   ctrl = this
@@ -7,11 +6,16 @@ AngularBlogApp.controller 'VideosController', ($scope,DataBridge,Video,Youtube) 
   ctrl.bridge = DataBridge.bridge
 
   # vars 
-
+  ctrl.hosts = [
+    "youtube",
+    "vimeo"
+  ]
 
   # init
   ctrl.init = (component) ->
     ctrl.data.video_component = component
+    ctrl.setVideo(component.postable)
+    ctrl.rest.new() if !ctrl.data.video
 
   # rest methods
   ctrl.rest =
@@ -27,17 +31,19 @@ AngularBlogApp.controller 'VideosController', ($scope,DataBridge,Video,Youtube) 
     new: ()->
       ctrl.clear()
       ctrl.data.activeVideo = {}
+      ctrl.data.video = ctrl.data.activeVideo
       ctrl.data.creating_new_video = true
 
     create: ->
-      if !(ctrl.locked || ctrl.form.$error.required)
+      if !(ctrl.locked || form_errors())
         ctrl.locked = true
         working_video = angular.copy(ctrl.data.activeVideo)
+        working_video.component_id = ctrl.data.video_component.id
         Video.save(
           working_video,
           (video)->
-            ctrl.data.videos ||= []
-            ctrl.data.videos.push(video)
+            ctrl.data.video_component.postable = video
+            ctrl.setVideo(video)
             ctrl.clear()
             ctrl.locked = false
           ,
@@ -48,44 +54,58 @@ AngularBlogApp.controller 'VideosController', ($scope,DataBridge,Video,Youtube) 
         )
 
 
-    edit: (index,video) ->
+    edit: (video) ->
       ctrl.clear()
-      ctrl.data.edit_index = index
       ctrl.data.activeVideo = video
+      ctrl.activeCopy = angular.copy(ctrl.data.activeVideo)
 
-    update: (index,video)->
-      if !(ctrl.locked || ctrl.form.$error.required)
+    update: ->
+      if !(ctrl.locked || form_errors())
         ctrl.locked = true
-        working_video = angular.extend(angular.copy(video),ctrl.data.activeVideo)
         Video.update(
-          working_video,
+          ctrl.data.activeVideo,
           (video)->
+            ctrl.data.video_component.postable = video
+            ctrl.setVideo(video)
+            ctrl.clear()
             ctrl.locked = false
           ,
           (error)->
             console.log("update_error:",error)
+            ctrl.clear()
             ctrl.locked = false
         )
         ctrl.clear()
 
-    delete: (index,video,videos)->
-      Video.delete(
-        video, 
-        (video)->
-          videos ||= ctrl.data.videos
-          videos.splice(index,1)
-        ,
-        (error)->
-          console.log("delete_error:",error)
-      )
-      ctrl.clear()
+    delete: (video,create_new)->
+      if !!video && !ctrl.locked
+        Video.delete(
+          video, 
+          (video)->
+            ctrl.data.video_component.postable = null
+            ctrl.clear()
+            ctrl.data.video = null
+            ctrl.rest.new() if create_new
+            ctrl.locked = false
+          ,
+          (error)->
+            console.log("delete_error:",error)
+            ctrl.clear()
+            ctrl.rest.new() if create_new
+            ctrl.locked = false
+        )
+
 
   # scope methods 
-  ctrl.setVideo = (video)->
+  ctrl.setVideo = (video,activate)->
     ctrl.data.video = video
 
   ctrl.setVideos = (videos)->
     ctrl.data.videos = videos
+
+  ctrl.reset = ->
+    ctrl.data.activeVideo = angular.extend(ctrl.data.activeVideo,ctrl.activeCopy)
+    ctrl.clear()
 
   ctrl.clear = ->
     ctrl.data.parent_id = null
@@ -93,10 +113,12 @@ AngularBlogApp.controller 'VideosController', ($scope,DataBridge,Video,Youtube) 
     ctrl.data.edit_index = null
     ctrl.data.creating_new_video = false
 
-  ctrl.isEditing = (index,parent_id)->
-    (index == ctrl.data.edit_index) && (parent_id == ctrl.data.parent_id)
+  ctrl.isEditing = ()->
+    !!ctrl.data.activeVideo && !!ctrl.data.activeVideo.id
 
   # internal
+  form_errors = ->
+    ctrl.form.identifier.$error.required || ctrl.form.host.$error.required
 
   # return
   return

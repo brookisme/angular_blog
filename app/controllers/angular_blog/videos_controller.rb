@@ -21,6 +21,10 @@ module AngularBlog
     def create
       @video = Video.new(video_params)
 
+      unless params[:component_id].blank?
+        @video.component = Component.where(id: params[:component_id]).last
+      end
+
       respond_to do |format|
         if @video.save
           format.html { redirect_to @video, notice: 'Video was successfully created.' }
@@ -61,8 +65,8 @@ module AngularBlog
       params.require(:video).permit(
         :id,  
         :_destroy, 
-        :is_sticky,
-        :subject
+        :identifier,
+        :host
       )
     end
   end
