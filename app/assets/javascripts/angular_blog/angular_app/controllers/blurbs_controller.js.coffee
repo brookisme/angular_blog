@@ -4,9 +4,9 @@ AngularBlogApp.controller 'BlurbsController', ($scope,DataBridge,Blurb) ->
   ctrl = this
   ctrl.data = {}
   ctrl.bridge = DataBridge.bridge
-  
+
   # vars 
-  ctrl.data.sizes = [
+  ctrl.sizes = [
     "tiny",
     "small",
     "normal",
@@ -17,6 +17,8 @@ AngularBlogApp.controller 'BlurbsController', ($scope,DataBridge,Blurb) ->
   # init
   ctrl.init = (component) ->
     ctrl.data.blurb_component = component
+    ctrl.setBlurb(component.postable)
+    ctrl.rest.new() if !ctrl.data.blurb
 
   # rest methods
   ctrl.rest =
@@ -27,22 +29,24 @@ AngularBlogApp.controller 'BlurbsController', ($scope,DataBridge,Blurb) ->
 
     show: (blurb_id)->
       Blurb.get({id: blurb_id}).$promise.then (blurb) ->
-        ctrl.data.header = header
+        ctrl.data.blurb = blurb
 
     new: ()->
       ctrl.clear()
       ctrl.data.activeBlurb = {}
-      ctrl.data.creating_new_header = true
+      ctrl.data.blurb = ctrl.data.activeBlurb
+      ctrl.data.creating_new_blurb = true
 
     create: ->
-      if !(ctrl.locked || ctrl.form.$error.required)
+      if !(ctrl.locked || form_errors())
         ctrl.locked = true
-        working_header = angular.copy(ctrl.data.activeBlurb)
+        working_blurb = angular.copy(ctrl.data.activeBlurb)
+        working_blurb.component_id = ctrl.data.blurb_component.id
         Blurb.save(
-          working_header,
-          (header)->
-            ctrl.data.headers ||= []
-            ctrl.data.headers.push(header)
+          working_blurb,
+          (blurb)->
+            ctrl.data.blurb_component.postable = blurb
+            ctrl.setBlurb(blurb)
             ctrl.clear()
             ctrl.locked = false
           ,
@@ -53,56 +57,71 @@ AngularBlogApp.controller 'BlurbsController', ($scope,DataBridge,Blurb) ->
         )
 
 
-    edit: (index,header) ->
+    edit: (blurb) ->
       ctrl.clear()
-      ctrl.data.edit_index = index
-      ctrl.data.activeBlurb = header
+      ctrl.data.activeBlurb = blurb
+      ctrl.activeCopy = angular.copy(ctrl.data.activeBlurb)
 
-    update: (index,header)->
-      if !(ctrl.locked || ctrl.form.$error.required)
+    update: ->
+      if !(ctrl.locked || form_errors())
         ctrl.locked = true
-        working_header = angular.extend(angular.copy(header),ctrl.data.activeBlurb)
         Blurb.update(
-          working_header,
-          (header)->
+          ctrl.data.activeBlurb,
+          (blurb)->
+            ctrl.data.blurb_component.postable = blurb
+            ctrl.setBlurb(blurb)
+            ctrl.clear()
             ctrl.locked = false
           ,
           (error)->
             console.log("update_error:",error)
+            ctrl.clear()
             ctrl.locked = false
         )
         ctrl.clear()
 
-    delete: (index,header,headers)->
-      Blurb.delete(
-        header, 
-        (header)->
-          headers ||= ctrl.data.headers
-          headers.splice(index,1)
-        ,
-        (error)->
-          console.log("delete_error:",error)
-      )
-      ctrl.clear()
+    delete: (blurb,create_new)->
+      if !!blurb && !ctrl.locked
+        Blurb.delete(
+          blurb, 
+          (blurb)->
+            ctrl.data.blurb_component.postable = null
+            ctrl.clear()
+            ctrl.data.blurb = null
+            ctrl.rest.new() if create_new
+            ctrl.locked = false
+          ,
+          (error)->
+            console.log("delete_error:",error)
+            ctrl.clear()
+            ctrl.rest.new() if create_new
+            ctrl.locked = false
+        )
 
 
   # scope methods 
-  ctrl.setBlurb = (header)->
-    ctrl.data.header = header
+  ctrl.setBlurb = (blurb,activate)->
+    ctrl.data.blurb = blurb
 
-  ctrl.setBlurbs = (headers)->
-    ctrl.data.headers = headers
+  ctrl.setBlurbs = (blurbs)->
+    ctrl.data.blurbs = blurbs
+
+  ctrl.reset = ->
+    ctrl.data.activeBlurb = angular.extend(ctrl.data.activeBlurb,ctrl.activeCopy)
+    ctrl.clear()
 
   ctrl.clear = ->
     ctrl.data.parent_id = null
     ctrl.data.activeBlurb = null
     ctrl.data.edit_index = null
-    ctrl.data.creating_new_header = false
+    ctrl.data.creating_new_blurb = false
 
-  ctrl.isEditing = (index,parent_id)->
-    (index == ctrl.data.edit_index) && (parent_id == ctrl.data.parent_id)
+  ctrl.isEditing = ()->
+    !!ctrl.data.activeBlurb && !!ctrl.data.activeBlurb.id
 
   # internal
+  form_errors = ->
+    ctrl.form.content.$error.required
 
   # return
   return

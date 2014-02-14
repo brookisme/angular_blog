@@ -21,6 +21,10 @@ module AngularBlog
     def create
       @blurb = Blurb.new(blurb_params)
 
+      unless params[:component_id].blank?
+        @blurb.component = Component.where(id: params[:component_id]).last
+      end
+
       respond_to do |format|
         if @blurb.save
           format.html { redirect_to @blurb, notice: 'Blurb was successfully created.' }
@@ -61,8 +65,8 @@ module AngularBlog
       params.require(:blurb).permit(
         :id,  
         :_destroy, 
-        :is_sticky,
-        :subject
+        :content,
+        :size
       )
     end
   end

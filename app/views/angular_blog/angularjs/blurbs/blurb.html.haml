@@ -1,3 +1,2 @@
-%div{ ng_controller: "BlurbsController as blurbs_ctrl", ng_init: "blurbs_ctrl.init(component)" }
-  %div{ class: "ab-blurb ab-size-{{blurb.size}}"} 
-    %div{ ng_bind_html: "blurb.content" } 
+%div{ ab_link_wrap: true, href: "{{ctrl.data.blurb.component.link}}", class:"ab-blurb ab-size-{{ctrl.data.blurb.size}}" }
+  %div{ ng_bind_html: "ctrl.data.blurb.content" } 

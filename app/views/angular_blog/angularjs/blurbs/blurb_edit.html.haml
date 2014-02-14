@@ -1,0 +1,13 @@
+%div{ ng_if: "!!ctrl.data.blurb.id" }
+  .form-row
+    .label-column
+    .input-column
+      .parital{ ab_partial: true, url: "blurbs/blurb" }
+
+  .form-row
+    .label-column
+    .input-column.bottom-spacer
+      %a{ ng_click: "ctrl.rest.edit(ctrl.data.blurb)" } 
+        %i.fa.fa-pencil-square-o Edit
+      %a.delete{ ab_confirm: "Do you really want to delete \"{{ctrl.data.blurb.content}}\"?", action: "ctrl.rest.delete(ctrl.data.blurb,true)" } 
+        %i.fa.fa-times Delete
