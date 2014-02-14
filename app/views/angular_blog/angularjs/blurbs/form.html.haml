@@ -11,7 +11,7 @@
       .label-column
         %label Blurb Text
       .input-column
-        %textarea{ ng_model: "ctrl.data.activeBlurb.content", name: "content", type: "text", placeholder: "Blurb content", required: true }
+        %textarea{ ng_model: "ctrl.data.activeBlurb.content", name: "content", type: "text", placeholder: "basic html allowed: line-breaks <br>, paragraphs <p>...</p>, bold <b>...</b>, italics <i>...</i>,links <a href='http://somewebsite.com'>...</a> and more!", required: true }
         %span.error{ ng_show: "ctrl.form.content.$error.required" } Required
 
 

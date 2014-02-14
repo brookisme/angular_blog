@@ -49,19 +49,27 @@ body {
 .post-content {
   width: 75%;
 }
+.post-tools {
+  text-align: right;
+}
 .post-tools a {
   margin-left: 10px;
 }
 .post-tools a .fa {
   margin-right: 5px;
 }
+.post-tool span {
+  font-size: 20px;
+  text-transform: uppercase;
+  margin-right: 4px;
+}
 /**
 *
 * Header
 *
 **/
-h1.ab-post-subject {
-  margin-top: 0; 
+h1.post-subject {
+  margin: 0 0 25px; 
 }
 .ab-header {
   margin: 0 0 10px;
@@ -148,9 +156,16 @@ h1.ab-post-subject {
 * Image/Video
 *
 **/
+
 .ab-image,
 .ab-video {
   margin: 10px 0;
+}
+.ab-video h4 {
+  text-transform: uppercase;
+  font-size: 16px;
+  color: #060;
+  margin: 0;
 }
 
 /**

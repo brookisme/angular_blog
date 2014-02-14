@@ -1,2 +1,4 @@
 .youtube-container{ data: { width: "{{component.width || null}}", height: "{{component.height || null}}", video_identifier: "{{ctrl.data.video.identifier}}"} }
   %div{ id: "player_{{ctrl.data.video.identifier}}", ng_init: "ctrl.youtube.init(ctrl.data.video.identifier)"}
+    %h4 Host: {{ctrl.data.video.host}}
+    %h4 Video ID: {{ctrl.data.video.identifier}}

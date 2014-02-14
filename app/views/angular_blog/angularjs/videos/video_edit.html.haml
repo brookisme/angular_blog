@@ -1,0 +1,16 @@
+%div{ ng_if: "!!ctrl.data.video.id" }
+  .form-row
+    .label-column
+    .input-column
+      %label
+        %div Host: {{ctrl.data.video.host}}
+        %div Video ID: {{ctrl.data.video.identifier}}
+        / .parital{ ab_partial: true, url: "videos/video" }
+
+  .form-row
+    .label-column
+    .input-column.bottom-spacer
+      %a{ ng_click: "ctrl.rest.edit(ctrl.data.video)" } 
+        %i.fa.fa-pencil-square-o Edit
+      %a.delete{ ab_confirm: "Do you really want to delete \"{{ctrl.data.video.content}}\"?", action: "ctrl.rest.delete(ctrl.data.video,true)" } 
+        %i.fa.fa-times Delete

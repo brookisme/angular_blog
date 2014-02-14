@@ -1,4 +1,3 @@
-%h1 VIDEO {{ctrl.data.video.identifier}}
 .ab-video
   %div{ ng_if:"ctrl.data.video.host=='youtube'", ab_partial: true, url: "videos/youtube" }
   %div{ ng_if:"ctrl.data.video.host=='vimeo'", ab_partial: true, url: "videos/vimeo" }

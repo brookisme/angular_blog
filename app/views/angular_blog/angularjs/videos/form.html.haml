@@ -1,0 +1,32 @@
+.active
+  %form{ name: "ctrl.form" }
+    .form-row
+      .label-column
+        %label 
+      .input-column
+        .input-header
+          Video ({{ctrl.data.activeVideo.id || "new"}})
+
+    .form-row
+      .label-column
+        %label Host
+      .input-column
+        %select{ ng_model: "ctrl.data.activeHeader.host", name: "host", ng_options:"host for host in ctrl.hosts", required: true }
+        %span.error{ ng_show: "ctrl.form.host.$error.required" } Required
+
+    .form-row
+      .label-column
+        %label Identifier
+      .input-column
+        %input{ ng_model: "ctrl.data.activeVideo.identifier", name: "identifier", type: "text", placeholder: "OHlVzQb-6Nc from youtube.com/watch?v=OHlVzQb-6Nc ", required: true }
+        %span.error{ ng_show: "ctrl.form.identifier.$error.required" } Required
+
+    .form-row
+      .label-column
+      .input-column
+        %a{ ng_if: "videos_ctrl.data.creating_new_video", ng_click: "videos_ctrl.rest.create()" } 
+          %i.fa.fa-pencil-square-o Create
+        %a{ ng_if: "videos_ctrl.isEditing()", ng_click: "videos_ctrl.rest.update(video,true)" } 
+          %i.fa.fa-pencil-square-o Update
+        %a.delete{ ng_if: "videos_ctrl.isEditing()", ng_click: "videos_ctrl.reset()" } 
+          %i.fa.fa-times Cancel
