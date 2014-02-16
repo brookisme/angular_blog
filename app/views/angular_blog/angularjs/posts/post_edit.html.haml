@@ -2,8 +2,10 @@
   .post-data.pull-right
     .post-details
       .timestamp {{post.timestamp}}
-      .author {{post.author}}
-    .post-tools{ ng_if: "true" }
+      .author 
+        .partial{ ab_partial: true, url: "shared/blogger", ng_init: "blogger=post.blogger" }
+
+    .post-tools{ ng_if: "ctrl.bridge.canEdit(post.blogger.id)" }
       %a{ ng_if: "!ctrl.isEditing($index,post.id) && !ctrl.data.creating_new_post", ng_click: "ctrl.rest.edit($index,post)", class: "pull-right" } 
         %i.fa.fa-pencil-square-o Edit
       %a.delete{ ng_if: "!ctrl.isEditing($index,post.id)", ab_confirm: "Do you really want to delete \"{{post.subject}}\"?", action: "ctrl.rest.delete($index,post,posts)" } 

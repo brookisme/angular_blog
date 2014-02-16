@@ -2,7 +2,8 @@
   .post-data.pull-right
     .post-details
       .timestamp {{post.timestamp}}
-      .author {{post.author}}
+      .author 
+        .partial{ ab_partial: true, url: "shared/blogger", ng_init: "blogger=post.blogger" }
 
   .post-content.pull-left.ease
     %h1.post-subject.ease{ ng_if: "post.display_subject" } 

@@ -5,7 +5,7 @@ module AngularBlog
     before_action :set_post, only: [:show, :edit, :update, :destroy]
 
     def index
-      @posts = Post.all.order(created_at: :desc)
+      @posts = Post.visible(current_admin)
       respond_to do |format|
         format.html
         format.json 

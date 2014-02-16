@@ -1,4 +1,4 @@
-.editor-box.clearfix{ ng_if: "true" }
+.editor-box.clearfix{ ng_if: "ctrl.bridge.isBlogger()" }
   .post-tools.pull-right
     .post-tool
       %a{ ng_click: "ctrl.bridge.toggleEditMode()"} 
