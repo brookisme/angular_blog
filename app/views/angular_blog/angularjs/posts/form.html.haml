@@ -40,7 +40,7 @@
             %input{ ng_model: "ctrl.data.activePost.comments_closed", type: "checkbox" }
             %label comments closed
   
-  %div{ ng_controller: "ComponentsController as components_ctrl", ab_partial: true, url: "components/form_list", ng_init: "components_ctrl.init(ctrl.data.activePost);ctrl=components_ctrl"  }
+  %div{ ng_if: "!!post.id", ng_controller: "ComponentsController as components_ctrl", ab_partial: true, url: "components/form_list", ng_init: "components_ctrl.init(ctrl.data.activePost);ctrl=components_ctrl"  }
      
 
 
