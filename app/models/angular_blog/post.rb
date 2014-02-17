@@ -23,5 +23,15 @@ module AngularBlog
     scope :visible_to_blogger, ->(admin) {
       where("angular_blog_posts.blogger_id = #{admin.id} OR angular_blog_posts.published = true")
     }
+
+    def text_content 
+      content = ""
+      components.each do |component|
+        if component.type == "Blurb" || component.type == "Header"
+          content += component.postable.content
+        end
+      end
+      content
+    end
   end
 end
