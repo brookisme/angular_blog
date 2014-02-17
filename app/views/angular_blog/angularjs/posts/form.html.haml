@@ -25,6 +25,12 @@
         .form-row
           .label_column
           .input-column.checkbox
+            %input{ ng_model: "ctrl.data.activePost.published", type: "checkbox" }
+            %label published
+
+        .form-row
+          .label_column
+          .input-column.checkbox
             %input{ ng_model: "ctrl.data.activePost.display_subject", type: "checkbox" }
             %label display subject
 

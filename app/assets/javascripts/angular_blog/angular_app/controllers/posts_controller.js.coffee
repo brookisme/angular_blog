@@ -33,6 +33,7 @@ AngularBlogApp.controller 'PostsController', ($scope,DataBridge,Post) ->
       if !(ctrl.locked || ctrl.form.$error.required)
         ctrl.locked = true
         working_post = angular.copy(ctrl.data.activePost)
+        working_post.blogger_id = ctrl.bridge.blogger.id
         Post.save(
           working_post,
           (post)->
@@ -60,6 +61,9 @@ AngularBlogApp.controller 'PostsController', ($scope,DataBridge,Post) ->
         Post.update(
           working_post,
           (post)->
+            ctrl.data.posts ||= []
+            ctrl.data.posts.splice(index,0,post)
+            ctrl.clear()
             ctrl.locked = false
           ,
           (error)->

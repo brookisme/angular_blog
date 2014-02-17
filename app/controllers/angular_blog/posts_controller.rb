@@ -25,7 +25,7 @@ module AngularBlog
 
     def create
       @post = Post.new(post_params)
-
+      process_post
       respond_to do |format|
         if @post.save
           format.html { redirect_to @post, notice: 'Post was successfully created.' }
@@ -38,6 +38,7 @@ module AngularBlog
     end
 
     def update
+      process_post
       respond_to do |format|
         if @post.update(post_params)
           format.html { redirect_to @post, notice: 'Post was successfully updated.' }
@@ -62,6 +63,10 @@ module AngularBlog
       @post = Post.find(params[:id])
     end
 
+    def process_post
+      (@post.published_on = Time.now) if (!@post.published && params[:published])
+    end
+
     def post_params
       params.require(:post).permit(
         :id,  
@@ -70,7 +75,9 @@ module AngularBlog
         :subject,
         :display_subject,
         :accept_comments,
-        :comments_closed
+        :comments_closed,
+        :published,
+        :blogger_id
       )
     end
   end

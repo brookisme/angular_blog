@@ -1,7 +1,7 @@
 %div{ class: "ab-post post-index-{{$index}} clearfix" }
   .post-data.pull-right
     .post-details
-      .timestamp {{post.timestamp}}
+      .timestamp {{post.timestamp || "unpublished"}}
       .author 
         .partial{ ab_partial: true, url: "shared/blogger", ng_init: "blogger=post.blogger" }
 

@@ -1,5 +1,5 @@
-json.extract! post, :id, :subject, :is_sticky, :display_subject, :accept_comments, :comments_closed, :blogger
-json.timestamp post.created_at.to_formatted_s(:long)
+json.extract! post, :id, :subject, :is_sticky, :display_subject, :accept_comments, :comments_closed, :blogger, :published
+(json.timestamp post.published_on.to_formatted_s(:long)) if post.published_on
 json.components post.components do |json,component|
   json.partial! 'angular_blog/components/component', component: component
 end
