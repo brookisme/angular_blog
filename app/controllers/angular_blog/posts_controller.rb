@@ -9,7 +9,7 @@ module AngularBlog
       respond_to do |format|
         format.html
         format.json 
-        format.atom 
+        format.atom
       end
     end
 

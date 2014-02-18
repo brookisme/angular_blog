@@ -1,11 +1,12 @@
 !!!
 %html
   %head
-    %title AngularApp
+    %title= "#{ AngularBlog.config['blog_title'] || "Blog" }"
+    = yield :head
     = stylesheet_link_tag  "application", :media => "all"
     = stylesheet_link_tag  "angular_blog/application", :media => "all"
     = csrf_meta_tags
-    = stylesheet_link_tag "//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css", rel: "stylesheet"
+    = stylesheet_link_tag "//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css",rel: "stylesheet"
     = yield :styles
     = yield :head_javascripts
 

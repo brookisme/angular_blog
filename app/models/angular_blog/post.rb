@@ -27,7 +27,7 @@ module AngularBlog
     def text_content 
       content = ""
       components.each do |component|
-        if component.type == "Blurb" || component.type == "Header"
+        if (component.type == "Blurb" || component.type == "Header") && !component.postable.nil?
           content += component.postable.content
         end
       end
