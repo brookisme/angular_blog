@@ -62,7 +62,7 @@ AngularBlogApp.controller 'PostsController', ($scope,DataBridge,Post) ->
           working_post,
           (post)->
             ctrl.data.posts ||= []
-            ctrl.data.posts.splice(index,0,post)
+            ctrl.data.posts.splice(index,1,post)
             ctrl.clear()
             ctrl.locked = false
           ,
