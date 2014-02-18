@@ -34,48 +34,6 @@ body {
 
 /**
 *
-* Post
-*
-**/
-.ab-post{
-  border-top: 1px dotted #aaa;
-  margin-bottom: 35px;
-  padding-top: 35px;
-  color: #666;
-}
-.ab-post.post-index-0 {
-  border-top: none;
-}
-.post-content {
-  width: 75%;
-}
-.post-tools {
-  text-align: right;
-}
-.post-tools a {
-  margin-left: 10px;
-}
-.post-tools a .fa {
-  margin-right: 5px;
-}
-.post-tool span {
-  font-size: 20px;
-  text-transform: uppercase;
-  margin-right: 4px;
-}
-
-.preview_subject {
-  font-weight: bold;
-}
-.preview_component {
-  margin-left: 5px;
-}
-.preview_component:after {
-  content: "...";
-}
-
-/**
-*
 * Header
 *
 **/
@@ -230,11 +188,6 @@ a.cancel,
 a.delete {
   color: #900;
 }
-
-.post-details {
-  text-align: right;
-}
-
 
 
 

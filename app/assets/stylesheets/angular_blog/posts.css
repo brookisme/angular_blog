@@ -2,3 +2,107 @@
   Place all the styles related to the matching controller here.
   They will automatically be included in application.css.
 */
+
+
+/*
+*
+* Post
+*
+*/
+
+.ab-post{
+  border-top: 1px dotted #aaa;
+  margin-bottom: 35px;
+  padding-top: 35px;
+  color: #666;
+}
+.ab-post.post-index-0 {
+  border-top: none;
+}
+.post-content {
+  width: 75%;
+}
+.post-tools {
+  text-align: right;
+}
+.post-tools a {
+  margin-left: 10px;
+}
+.post-tools a .fa {
+  margin-right: 5px;
+}
+.post-tool span {
+  font-size: 20px;
+  text-transform: uppercase;
+  margin-right: 4px;
+}
+
+.preview_subject {
+  font-weight: bold;
+}
+.preview_component {
+  margin-left: 5px;
+}
+.preview_component:after {
+  content: "...";
+}
+
+.post-details {
+  text-align: left;
+}
+
+.post-details .timestamp {
+  margin-bottom: 5px;
+}
+
+
+
+/*
+*
+* Blogger
+*
+*/
+
+.blogger-info {
+  width: 150;
+  text-align: center;
+  overflow: hidden;
+}
+
+.blogger-image {
+  overflow: hidden;
+  width: 148px;
+  padding: 2px;
+  border: 1px solid #bbb;
+}
+.blogger-image image {
+  overflow: hidden;
+  width: 148px;
+  height: auto;
+}
+.blogger-details {
+  margin-top: 5px;
+}
+.blogger-details .name {
+  font-size: 16px;
+  text-transform: capitalize;
+}
+.blogger-social ul {
+  margin: 0;
+  text-align: left;
+}
+.blogger-social ul li {
+  display: inline;
+  margin-right: 5px;
+}
+.blogger-position {
+  border-top: 1px dotted #bbb;
+  border-bottom: 1px dotted #bbb;
+  margin: 5px 0;
+  padding: 5px 0;
+}
+.blogger-position .title {
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: bold;
+}

@@ -1,25 +1,29 @@
-{{blogger.email}}
-/ %div{ class: "profile-{{blogger.first_name}}-{{blogger.last_name}} profile-card" }
-/   .box.under-card
-/     .description
-/       .name About {{blogger.first_name}}
-/       .description {{blogger.bio}}
-/   .box.over-card
-/     %img.profile-image{alt: "Kohl gill", src: "/assets/team/kohl-gill-30de0aae83dee4e2676dd4ce7e06a64f.jpg"}/
-/     .details
-/       .name {{blogger.first_name}} {{blogger.last_name}}
-/       .position {{blogger.title}}
-/     .social
-/       %ul
-/         %li
-/           %a{href: "mailto:kohlgill@laborvoices.com"}
-/             %i.icon-envelope
-/         %li
-/           %a{href: "http://linkedin.com/in/kohlgill"}
-/             %i.icon-linkedin
-/         %li
-/           %a{href: "http://twitter.com/kohlgill"}
-/             %i.icon-twitter
-/         %li
-/           %a.open-profile.pull-right{"data-description" => "null"}
-/             %i.icon-male
+%div{ class: "blogger-{{blogger.first_name}}-{{blogger.last_name}} blogger-info" }
+  .blogger-info
+
+    .blogger-image{ ng_if: "!!blogger.image_url" }
+      %img{ src: "{{blogger.image_url}}" }
+
+    .blogger-details
+      .name {{blogger.first_name}} {{blogger.last_name}}
+
+    .blogger-position{ ng_if: "!!blogger.company || !!blogger.title" }
+      .company{ ng_if: "!!blogger.company" } 
+        %span{ ng_if: "!blogger.url" } {{blogger.company}}
+        %a{ ng_if: "!!blogger.url", href: "{{blogger.url}}" } {{blogger.company}}
+      .title{ ng_if: "!!blogger.title" } {{blogger.title}}
+
+    .blogger-social
+      %ul
+        %li
+          %a{ href: "{{blogger.email}}" }
+            e 
+            %i.icon-envelope
+        %li{ ng_if: "!!blogger.linkedin" }
+          %a{ href: "{{blogger.linkedin}}" }
+            li 
+            %i.icon-linkedin
+        %li{ ng_if: "!!blogger.twitter" }
+          %a{href: "{{blogger.twitter}}" }
+            t 
+            %i.icon-twitter
