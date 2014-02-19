@@ -1,10 +1,12 @@
 .editor-box.clearfix{ ng_if: "ctrl.bridge.isBlogger()" }
   .post-tools.pull-right
     .post-tool
-      %a{ ng_click: "ctrl.bridge.toggleEditMode()"} 
+      %a{ ng_if: "!ctrl.bridge.edit_mode", ng_click: "ctrl.bridge.toggleEditMode()"} 
         %span Editor 
-        %i.fa.fa-minus-square-o.fa-2x{ ng_if: "ctrl.bridge.edit_mode" }
         %i.fa.fa-plus-square-o.fa-2x{ ng_if: "!ctrl.bridge.edit_mode" }
+      %a.cancel{ ng_if: "ctrl.bridge.edit_mode", ng_click: "ctrl.bridge.toggleEditMode()"} 
+        %span Editor 
+        %i.fa.fa-minus-square-o.fa-2x{ }
 
   .post-tools.pull-left{ ng_if: "!item_view && ctrl.bridge.edit_mode" }
     .post-tool{ng_if: "!ctrl.data.creating_new_post"}

@@ -64,7 +64,13 @@ module AngularBlog
     end
 
     def process_post
-      (@post.published_on = Time.now) if (!@post.published && params[:published])
+      if !@post.published
+        if !!params[:published]
+          @post.published_on = Time.now
+        else
+          @post.published_on = nil
+        end
+      end          
     end
 
     def post_params

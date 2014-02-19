@@ -10,8 +10,7 @@ AngularBlogApp.controller 'PostsController', ($scope,DataBridge,Post) ->
 
 
   # init
-  ctrl.init = () ->
-    console.log("posts init")
+  # ctrl.init = () -> TODO
 
   # rest methods
   ctrl.rest =
@@ -37,6 +36,7 @@ AngularBlogApp.controller 'PostsController', ($scope,DataBridge,Post) ->
         Post.save(
           working_post,
           (post)->
+            post = setDate(post)
             ctrl.data.posts ||= []
             ctrl.data.posts.splice(0,0,post)
             ctrl.clear()
@@ -61,6 +61,7 @@ AngularBlogApp.controller 'PostsController', ($scope,DataBridge,Post) ->
         Post.update(
           working_post,
           (post)->
+            post = setDate(post)
             ctrl.data.posts ||= []
             ctrl.data.posts.splice(index,1,post)
             ctrl.clear()
@@ -110,6 +111,13 @@ AngularBlogApp.controller 'PostsController', ($scope,DataBridge,Post) ->
       (index == ctrl.data.edit_index) && (post_id == ctrl.data.activePost.id)
 
   # internal
+
+  setDate = (post)->
+    if !post.published 
+      post.timestamp = null
+    else if !post.published_on
+      post.timestamp = (new Date()).toLocaleString()
+    post
 
   # return
   return

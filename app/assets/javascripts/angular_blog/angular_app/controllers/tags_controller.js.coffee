@@ -9,8 +9,7 @@ AngularBlogApp.controller 'TagsController', ($scope,DataBridge,Tag) ->
 
 
   # init
-  ctrl.init = () ->
-    console.log("tags init")
+  # ctrl.init = () -> TODO
 
   # rest methods
   ctrl.rest =

@@ -53,6 +53,10 @@
 
 .post-details .timestamp {
   margin-bottom: 5px;
+  width: 150px;
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 
@@ -90,6 +94,7 @@
 .blogger-social ul {
   margin: 0;
   text-align: left;
+  font-size: 11px;
 }
 .blogger-social ul li {
   display: inline;
