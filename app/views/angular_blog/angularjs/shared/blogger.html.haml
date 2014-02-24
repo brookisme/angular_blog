@@ -5,12 +5,12 @@
       %img{ src: "{{blogger.image_url}}" }
 
     .blogger-details
-      .name {{blogger.first_name}} {{blogger.last_name}}
+      .name 
+        %span{ ng_if: "!blogger.url" } {{blogger.first_name}} {{blogger.last_name}}
+        %a{ ng_if: "!!blogger.url", href: "{{blogger.url}}" } {{blogger.first_name}} {{blogger.last_name}}
 
     .blogger-position{ ng_if: "!!blogger.company || !!blogger.title" }
-      .company{ ng_if: "!!blogger.company" } 
-        %span{ ng_if: "!blogger.url" } {{blogger.company}}
-        %a{ ng_if: "!!blogger.url", href: "{{blogger.url}}" } {{blogger.company}}
+      .company{ ng_if: "!!blogger.company" } {{blogger.company}}
       .title{ ng_if: "!!blogger.title" } {{blogger.title}}
 
     .blogger-social
