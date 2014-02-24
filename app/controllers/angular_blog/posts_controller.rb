@@ -82,7 +82,7 @@ module AngularBlog
       if !@post.published
         if !!params[:published]
           @post.published_on = Time.now
-          @post.permamapth = @post.default_permapath
+          @post.permampath = @post.default_permapath
         else
           @post.published_on = nil
         end
