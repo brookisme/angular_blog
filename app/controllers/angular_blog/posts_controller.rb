@@ -28,7 +28,11 @@ module AngularBlog
 
     def show_post
       @post = Post.where(permapath: params_to_permapath).last
-      render :show
+      if @post.nil?
+        not_found
+      else
+        render :show
+      end
     end
 
     def new
@@ -104,6 +108,10 @@ module AngularBlog
         :comments_closed,
         :blogger_id
       )
+    end
+
+    def not_found
+      raise ActionController::RoutingError.new('Blog Post Not Found')
     end
   end
 end
