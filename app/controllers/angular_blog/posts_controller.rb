@@ -74,6 +74,7 @@ module AngularBlog
     end
 
   private
+
     def set_post
       @post = Post.find(params[:id])
     end
@@ -81,11 +82,10 @@ module AngularBlog
     def process_post
       if !@post.published
         if !!params[:published]
-          @post.published_on = Time.now
-          @post.permapath = @post.default_permapath
-        else
-          @post.published_on = nil
+          @post.publish 
         end
+      elsif !params[:published]
+        @post.publish(false)
       end          
     end
 
@@ -102,7 +102,6 @@ module AngularBlog
         :display_subject,
         :accept_comments,
         :comments_closed,
-        :published,
         :blogger_id
       )
     end

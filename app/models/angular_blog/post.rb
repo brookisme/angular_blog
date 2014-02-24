@@ -29,6 +29,18 @@ module AngularBlog
       where("published_on >= ?",date).where("published_on < ?",date + 1.day)
     end
 
+    def publish publish_post=true
+      if publish_post
+        self.published = true
+        self.published_on = Time.now
+        self.permapath = self.default_permapath
+      else
+        self.published = false
+        self.published_on = nil
+        self.permapath = nil   
+      end
+    end
+
     def default_permapath
       if published && published_on
         path = published_on.strftime("%Y/%m/%d/") + subject.parameterize
