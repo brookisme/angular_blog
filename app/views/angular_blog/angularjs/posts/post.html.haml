@@ -7,7 +7,7 @@
 
   .post-content.pull-left.ease
     %h1.post-subject.ease{ ng_if: "post.display_subject" } 
-      %a{ ng_if: "!item_view", href: "/blog/posts/{{post.id}}" } {{post.subject}}
+      %a{ ng_if: "!item_view", href: "{{post.link}}" } {{post.subject}}
       %span{ ng_if: "item_view" } {{post.subject}}
 
     %div{ ng_controller: "ComponentsController as components_ctrl", ng_init: "components_ctrl.init(post);" }

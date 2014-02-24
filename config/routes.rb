@@ -3,7 +3,6 @@ AngularBlog::Engine.routes.draw do
   scope :templates do
     get ':path.html' => 'application#template', :constraints => { :path => /.+/  }
   end
-
   resources :posts
   resources :comments
   resources :components
@@ -12,4 +11,7 @@ AngularBlog::Engine.routes.draw do
   resources :images
   resources :videos
   resources :tags
+
+  get ':year/:month/:day/:parameterized_title' => 'posts#show_post'
+  
 end

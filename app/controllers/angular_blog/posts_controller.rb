@@ -14,6 +14,21 @@ module AngularBlog
     end
 
     def show
+      unless @post.nil? || @post.permapath.nil?
+        path_array = @post.permapath.split("/")
+        if path_array.length == 4
+          redirect_to action: :show_post,
+                    year: path_array[0],
+                    month: path_array[1],
+                    day: path_array[2],
+                    parameterized_title: path_array[3]
+        end
+      end
+    end
+
+    def show_post
+      @post = Post.where(permapath: params_to_permapath).last
+      render :show
     end
 
     def new
@@ -67,10 +82,15 @@ module AngularBlog
       if !@post.published
         if !!params[:published]
           @post.published_on = Time.now
+          @post.permamapth = @post.default_permapath
         else
           @post.published_on = nil
         end
       end          
+    end
+
+    def params_to_permapath
+      params[:year].to_s + "/" + params[:month].to_s + "/" + params[:day].to_s + "/" + params[:parameterized_title].to_s
     end
 
     def post_params

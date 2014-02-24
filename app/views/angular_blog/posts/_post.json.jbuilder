@@ -1,5 +1,10 @@
 json.extract! post, :id, :subject, :is_sticky, :display_subject, :accept_comments, :comments_closed, :blogger, :published
 (json.timestamp post.published_on.strftime("%a, %b #{Time.now.day.ordinalize} %Y %l:%M%P")) if post.published_on
+if post.published && !post.permapath.nil?
+  json.link ('/blog/' + post.permapath)
+else
+  json.link post_path(post)
+end
 json.components post.components do |json,component|
   json.partial! 'angular_blog/components/component', component: component
 end
