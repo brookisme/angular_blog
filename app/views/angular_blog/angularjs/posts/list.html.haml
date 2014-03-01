@@ -1,5 +1,4 @@
 .ease{ ng_if: "ctrl.bridge.edit_mode && ctrl.data.creating_new_post" }
   .comment-new{ ab_partial: true, url: "posts/form" }
-
-.repeater.ease{ ng_repeat: "post in ctrl.data.posts" }
+.repeater.ease{ ng_repeat: "post in ctrl.data.posts", ng_init: "ctrl.addthis.init(ctrl.bridge.blog_root,ctrl.published_count)" }
   .comment-new{ ab_partial: true, url: "posts/item" }

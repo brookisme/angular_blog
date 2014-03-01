@@ -2,6 +2,8 @@
 %html
   %head
     %title= "#{ AngularBlog.config['blog_title'] || "Blog" }"
+    %meta{ name: "og:site_name",  content: "LaborVoices" }
+    %meta{ name: "og:image",  content: "https://s3.amazonaws.com/laborvoices/website/laborvoices_spoke_squared.jpg" }
     = yield :head
     = stylesheet_link_tag  "application", :media => "all"
     = stylesheet_link_tag  "angular_blog/application", :media => "all"
@@ -11,6 +13,7 @@
     = yield :head_javascripts
 
   %body{ id: "labor-voices" }
+    #fb-root
     = yield :header
     .main-wrappaer
       = yield :hero
@@ -23,5 +26,10 @@
 
     / scripts
     = javascript_include_tag "angular_blog/application"
+    %script#add_this_config{ type: "text/javascript" }
+      var addthis_config = addthis_config||{};
+      addthis_config.data_track_addressbar = false;
+      addthis_config.data_track_clickback = false;
+
     = yield :javascripts
     = render 'layouts/analytics' if Rails.env=="production"

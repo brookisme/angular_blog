@@ -1,6 +1,10 @@
+- content_for :head do
+  %meta{ name: "og:title",  content: "#{@post.subject}" }
+  %meta{ name: "og:url",  content: "#{root_url}#{@post.permapath}" }
+
 - post_json = render template: 'angular_blog/posts/show', formats: [:json]
 #angular_blog{ "ng-app" => "AngularBlogApp" }
   %div{ class: "ng-cloak toggle tall" }
-    %div{ ng_controller: "PostsController as posts_ctrl", ng_init: "posts_ctrl.setPost(#{post_json});posts_ctrl.bridge.setBlogger(#{current_admin.to_json})" }
+    %div{ ng_controller: "PostsController as posts_ctrl", ng_init: "posts_ctrl.setPost(#{post_json});posts_ctrl.bridge.setBlogger(#{current_admin.to_json});posts_ctrl.bridge.setBlogRoot('#{root_url}')" }
       %div{ ab_partial: true, url: "posts/editor_header", ng_init: "ctrl=posts_ctrl"}
       %div{ ab_partial: true, url: "posts/item", ng_init: "ctrl=posts_ctrl;post=ctrl.data.post;item_view=true"}

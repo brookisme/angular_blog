@@ -81,3 +81,5 @@ AngularBlogApp.directive "abVimeo", ->
   link: linker
 
 
+
+

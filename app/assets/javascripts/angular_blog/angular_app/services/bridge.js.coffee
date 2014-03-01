@@ -6,9 +6,12 @@ AngularBlogApp.factory "DataBridge", ->
     toggleEditMode: ->
       this.edit_mode = !this.edit_mode
     setBlogger: (blogger)->
-      this.blogger = blogger
-      this.blogger_id = blogger.id
-      this.blogger_is_super = (blogger.role == 'super')
+      if !!blogger
+        this.blogger = blogger
+        this.blogger_id = blogger.id
+        this.blogger_is_super = (blogger.role == 'super')
+    setBlogRoot: (blog_root)->
+      this.blog_root = blog_root
     isBlogger: ->
       !!this.blogger_id
     canEdit: (blogger_id)->

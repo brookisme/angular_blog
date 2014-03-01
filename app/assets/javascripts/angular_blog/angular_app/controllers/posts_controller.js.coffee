@@ -1,10 +1,11 @@
 
-AngularBlogApp.controller 'PostsController', ($scope,DataBridge,Post) ->
+AngularBlogApp.controller 'PostsController', ($scope,DataBridge,Post,AddthisManager) ->
   # setup
   ctrl = this
   ctrl.data = {}
   ctrl.bridge = DataBridge.bridge
   ctrl.preview = {}
+  ctrl.addthis = AddthisManager
 
   # vars 
 

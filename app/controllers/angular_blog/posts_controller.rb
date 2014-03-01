@@ -6,6 +6,7 @@ module AngularBlog
 
     def index
       @posts = Post.visible(current_admin)
+      @published_posts_count = AngularBlog::Post.where(published: true).where.not(published_on: nil).count
       respond_to do |format|
         format.html
         format.json 

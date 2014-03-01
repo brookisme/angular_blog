@@ -8,7 +8,9 @@ atom_feed do |feed|
         entry.title post.subject
         entry.content post.text_content
         entry.author do |author|
-          author.name post.blogger.display_name 
+          unless post.blogger.nil?
+            author.name post.blogger.display_name  
+          end
         end
       end
     end
