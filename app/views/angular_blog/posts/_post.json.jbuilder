@@ -1,7 +1,11 @@
 unless post.nil?
   json.extract! post, :id, :subject, :is_sticky, :display_subject, :accept_comments, :comments_closed, :blogger, :published
-  if post.published && !post.permapath.nil?
-    link = ('/blog/' + post.permapath)
+  if post.published
+    if !post.permapath.nil?
+      link = ('/blog/' + post.permapath)
+    else
+      link = post_path(post)
+    end
     (json.timestamp post.published_on.strftime("%a, %b #{Time.now.day.ordinalize} %Y %l:%M%P")) if post.published_on
   else
     link = post_path(post)

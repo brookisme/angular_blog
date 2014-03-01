@@ -7,15 +7,15 @@ module AngularBlog
     has_many :post_tags
     has_many :tags, through: :post_tags
 
-    scope :visible, ->(current_admin,timestamp=nil){
+    scope :visible, ->(current_admin){
       if current_admin.nil?
-        posts = where(published: true)
+        posts = where(published: true).where.not(published_on: nil)
       elsif current_admin.is_super?
         posts = all
       elsif current_admin.is_blogger
         posts = visible_to_blogger(current_admin) 
       else
-        posts = where(published: true)
+        posts = where(published: true).where.not(published_on: nil)
       end
       posts.order(created_at: :desc)
     }

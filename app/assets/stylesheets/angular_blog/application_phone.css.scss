@@ -2,4 +2,35 @@
 @media only screen and (max-width: 660px) and (min-width: 0) {
 
 
+  .blog-content {
+    width: $content_width_phone;
+  }
+
+  .post-data.pull-right {
+    float: left;
+    margin-bottom: 30px;
+    text-align: left
+  }
+  .post-data .blogger-social,
+  .post-data .blogger-image {
+    display: none;
+  }
+
+  .post-data .blogger-info,
+  .post-data .blogger-details {
+    text-align: left
+  }
+
+  .post-data .post-details .timestamp {
+    margin-bottom: -5px;
+  }
+
+  body,
+  .main-wrapper
+  {
+    width: 100%;
+    overflow: hidden;
+  }
+
+
 }

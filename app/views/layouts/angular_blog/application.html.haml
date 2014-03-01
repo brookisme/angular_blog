@@ -4,6 +4,10 @@
     %title= "#{ AngularBlog.config['blog_title'] || "Blog" }"
     %meta{ name: "og:site_name",  content: "LaborVoices" }
     %meta{ name: "og:image",  content: "https://s3.amazonaws.com/laborvoices/website/laborvoices_spoke_squared.jpg" }
+    %meta{ charset: "utf-8" }
+    %meta{ content: "IE=edge,chrome=1", "http-equiv" => "X-UA-Compatible" }
+    %meta{ content: "width=device-width, initial-scale=1.0, user-scalable=no", name: "viewport" }
+    %meta{ content: "yes", name: "apple-mobile-web-app-capable" }
     = yield :head
     = stylesheet_link_tag  "application", :media => "all"
     = stylesheet_link_tag  "angular_blog/application", :media => "all"
