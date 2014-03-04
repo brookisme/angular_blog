@@ -11,7 +11,7 @@ AngularBlogApp.factory "AddthisManager", ->
       this.load()
 
   tags: (link,title) ->
-    '<div class="addthis_toolbox addthis_default_style" addthis:url="'+this.blog_root+link+'" addthis:title="'+title+'">
+    '<div class="addthis_toolbox addthis_default_style" addthis:url="'+this.blog_root+link.substring(1)+'" addthis:title="'+title+'">
       <a class="addthis_button_preferred_1"></a>
       <a class="addthis_button_preferred_2"></a>
       <a class="addthis_button_preferred_3"></a>
