@@ -1,6 +1,6 @@
 module AngularBlog
   class Post < ActiveRecord::Base
-    belongs_to :blogger, class_name: "SurveyBase::Admin"
+    belongs_to :blogger, class_name: "Admin"
 
     has_many :comments, -> { order(created_at: :asc) }
     has_many :components, -> { order(index: :asc, created_at: :asc) }

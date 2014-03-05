@@ -2,6 +2,7 @@ require_dependency "angular_blog/application_controller"
 
 module AngularBlog
   class PostsController < ApplicationController
+
     before_action :set_post, only: [:show, :edit, :update, :destroy]
 
     def index
