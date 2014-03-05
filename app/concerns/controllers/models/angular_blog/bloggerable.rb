@@ -1,4 +1,4 @@
-module AngularBase
+module AngularBlog
   module Bloggerable
   extend ActiveSupport::Concern
     included do
