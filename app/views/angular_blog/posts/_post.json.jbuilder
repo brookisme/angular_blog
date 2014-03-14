@@ -6,7 +6,7 @@ unless post.nil?
     else
       link = post_path(post)
     end
-    (json.timestamp post.published_on.strftime("%a, %b #{Time.now.day.ordinalize} %Y %l:%M%P")) if post.published_on
+    (json.timestamp post.published_on.strftime("%a, %b #{post.published_on.day.ordinalize} %Y %l:%M%P")) if post.published_on
   else
     link = post_path(post)
   end
