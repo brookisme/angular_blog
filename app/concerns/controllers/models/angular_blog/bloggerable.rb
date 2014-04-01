@@ -6,7 +6,7 @@ module AngularBlog
     end
 
     def display_name
-      (first_name.to_s + " " + last_name).to_s.titleize
+      (first_name.to_s.capitalize + " " + middle_name.to_s.capitalize + " " + last_name.to_s.capitalize)
     end
   end
 end
