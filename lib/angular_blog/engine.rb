@@ -7,14 +7,12 @@ module AngularBlog
       g.fixture_replacement :factory_girl, dir: 'spec/factories'
     end
 
-    config.to_prepare do
+    initializer :angular_blog_init do |app|
+      AngularBlog.config = YAML.load(File.read(File.expand_path('config/angular_blog.yml',app.root)))
+
       Dir.glob(AngularBlog::Engine.root + "app/concerns/**/*.rb").each do |c|
         require_dependency(c)
       end
-    end
-
-    initializer :survey_base_init do |app|
-      AngularBlog.config = YAML.load(File.read(File.expand_path('config/angular_blog.yml',app.root)))
     end
   end
 end
