@@ -17,7 +17,7 @@ module AngularBlog
       else
         posts = where(published: true).where.not(published_on: nil)
       end
-      posts.order(created_at: :desc)
+      posts.order(published_on: :desc)
     }
 
     scope :visible_to_blogger, ->(admin) {
